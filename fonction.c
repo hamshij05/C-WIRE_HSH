@@ -47,6 +47,9 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
 if(a==NULL){
   *h=1;
   return creationarbre(e);
+else(e<a->elmt){
+  *h=-*h;
+  a->fg=insertionAVL
 
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
