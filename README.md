@@ -14,5 +14,14 @@ Le système est composé de :
 
 
 Structure : 
+●biblio.h : contient tous les bibliothèques utilisées
 ●Makefile : permet d'automatiser la compilation
-●Rapport du projet C-WIRE
+
+●Rapport du projet contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.
+
+
+Auteurs : 
+
+Hamshigaa JEKUMAR - hamshij05
+Sira DIAKITE - 
+Hajar BELQUASS
