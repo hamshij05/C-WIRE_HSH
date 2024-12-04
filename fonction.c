@@ -45,13 +45,13 @@ Arbre *equilibrageAVL(Arbre*a){
 
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
-  
+  Arbre* pivot=a->fd;
   int eq_a=a->equilibre;
   int eq_p=pivot->equilibre;
 
-  pivot->fd=a-fg;
-  a-fg=eq_a-min(eq_p,0)-1;
-  a-fg=eq_a-max
+  pivot->fg=a;
+  a->equilibre=eq_a-max(eq_p,0)-1;
+  pivot->equilibre=min(eq_a-2,eq_a+eq_p-2,eq_p-1)
 
 //Rotation droite pour rééquilibrer l'arbre
 
