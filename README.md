@@ -7,8 +7,12 @@
 
 **Description du projet :**
 Le projet C-Wire vise à développer un système pour analyser les données de distribution d'énergie en France. L'objectif est de déterminer la production, la consommation et la répartition énergétique à travers les différents niveaux du réseau électrique (centrales, stations HV-B, HV-A, postes LV).
+
 Le système est composé de :
 ●Un script Shell (c-wire.sh) pour filtrer les données et orchestrer les traitements.
 ●Un programme C utilisant un arbre AVL pour traiter efficacement les données : faire la somme des consommations d'un type de station. Etant donnée les nombreauses données et stations, nous allons passer par un AVL afin de limiter le temps de traitement.
 
 
+Structure : 
+●Makefile : permet d'automatiser la compilation
+●Rapport du projet C-WIRE
