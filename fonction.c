@@ -37,5 +37,10 @@ Arbre *equilibrageAVL(Arbre*a){
       return rotationDroite(a);
     }
     else{
+      return doubleRotationDroite(a);
+    }
+    }
+    return a;
+  }
 
 
