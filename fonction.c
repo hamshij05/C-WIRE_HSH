@@ -43,4 +43,20 @@ Arbre *equilibrageAVL(Arbre*a){
     return a;
   }
 
+//Rotation gauche pour rééquilibrer l'arbre
+Arbre *rotationGauche(Arbre *a){
+  
+  int eq_a=a->equilibre;
+  int eq_p=pivot->equilibre;
 
+  pivot->fd=a-fg;
+  a-fg=eq_a-min(eq_p,0)-1;
+  a-fg=eq_a-max
+
+//Rotation droite pour rééquilibrer l'arbre
+
+//Fonction pour calculer la hauteur de l'arbre AVL
+
+//
+
+//La fonction pour mise à jour la hauteur d'un noeud apres modification
