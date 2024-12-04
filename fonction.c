@@ -44,12 +44,33 @@ Arbre *equilibrageAVL(Arbre*a){
 
 //Insertion de l'arbre AVL
 Arbre *insertionAVL(Arbre *a, int e, int *h){
-if(a==NULL){
-  *h=1;
-  return creationarbre(e);
-else(e<a->elmt){
-  *h=-*h;
-  a->fg=insertionAVL
+    if (a==NULL){
+        *h=1;
+        return creationArbre(e);
+    }
+    else if(e<a->elmt){
+        a->fg=insertionAVL(a->fg,e,h);
+        *h=-*h;
+    }
+    else if(e>a->elmt){
+        a->fd=insertionAVL(a->fd,e,h);    
+    }
+    else{
+        *h=0;
+        return a;
+    }
+    if(*h!=0){
+        a->equilibre=a->equilibre+*h;
+        a=equilibrageAVL(a);
+        if(a->equilibre==0){
+            *h=0;
+        }
+        else{
+            *h=1;
+        }
+    }
+    return a;
+}
 
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
@@ -75,7 +96,17 @@ Arbre *rotationDroite(Arbre *a){
   return pivot;
 }
 
+//Double rotation gauche
+Arbre* doubleRotationGauche(Arbre* a){
+    a->fd=rotationDroite(a->fd);
+    return rotationGauche(a);
+}
 
+//Double rotation droite
+Arbre* doubleRotationDroite(Arbre* a){
+    a->fg=rotationGauche(a->fg);
+    return rotationDroite(a);
+}
 //Fonction pour calculer la hauteur de l'arbre AVL
 
 //
