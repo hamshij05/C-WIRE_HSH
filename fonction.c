@@ -23,4 +23,19 @@ Arbre *creationarbre(int a){
   return nouveau;
 }
 
-//Insertion de 
+//Insertion de la fonction equilibre si nécessaire
+Arbre *equilibrageAVL(Arbre*a){
+  if(a->equilibre>=2){
+    if(a->fd->equilibre>=0){
+      return rotationGauche(a);
+    else{
+      return doubleRotationGauche(a);
+    }
+  }
+  else(a->equilibre<=-2){
+    if(a-fg-equilibre<=0){
+      return rotationDroite(a);
+    }
+    else{
+
+
