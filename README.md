@@ -25,3 +25,5 @@ Auteurs :
 Hamshigaa JEKUMAR - hamshij05
 Sira DIAKITE - 
 Hajar BELQUASS
+
+//Cette fichier main.c lit le fichier CSV, extrait les données et les insère dans un arbre AVL
