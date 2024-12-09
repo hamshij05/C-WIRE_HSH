@@ -32,6 +32,6 @@ Le projet C-Wire vise à développer un système pour analyser les données de d
 
 
 ## **Auteurs :**   
-**Hamshigaa JEKUMAR** - hamshij05  
-**Sira DIAKITE** - Sira-la-Staaar  
-**Hajar BELQUASS** - hjrblq  
+- **Hamshigaa JEKUMAR** - hamshij05  
+- **Sira DIAKITE** - Sira-la-Staaar  
+- **Hajar BELQUASS** - hjrblq  
