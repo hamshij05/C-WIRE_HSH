@@ -19,7 +19,7 @@ Le système est composé de :
 -  **Un programme C** :  
  Utilisation d'arbre AVL pour traiter efficacement les données : faire la somme des consommations d'un type de station. Etant donnée les nombreauses données et stations, nous allons passer par un AVL afin de limiter le temps de traitement.  
 
-## **Structure :**
+# **Structure :**
   - **`biblio.h`** : contient tous les bibliothèques utilisées  
   - **`Makefile`** : permet d'automatiser la compilation  
   - **`fonctions.c`** :  
@@ -29,7 +29,7 @@ Le système est composé de :
 
 
 
-## **Auteurs :**   
+# **Auteurs :**   
 - **Hamshigaa JEKUMAR** - hamshij05  
 - **Sira DIAKITE** - Sira-la-Staaar  
 - **Hajar BELQUASS** - hjrblq  
