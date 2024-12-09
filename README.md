@@ -6,13 +6,13 @@
 **Bienvenue dans notre programme**
 
 ## Sommaire
-1. [Description du projet](#description-du-projet)
+1. [Description du projet](##description-du-projet)
 2. [Structure](#structure)
 3. [Installation](#installation)
 4. [Utilisation](#utilisation)
 5. [Auteurs](#auteurs)
 
-# Description du projet:    
+## Description du projet:    
 Le projet C-Wire vise à développer un système pour analyser les données de distribution d'énergie en France. L'objectif est de déterminer la production, la consommation et la répartition énergétique à travers les différents niveaux du réseau électrique (centrales, stations HV-B, HV-A, postes LV).
 Le système est composé de :
 - **Un script Shell (`c-wire.sh`)** :
