@@ -5,8 +5,8 @@
 ## ***Projet-semestre1 - PréIng2***
 **Bienvenue dans notre programme**
 
-## Table des Matières
-1. [Description du projet](#description du projet)
+## Sommaire
+1. [Description du projet](#descritpion du projet)
 2. [Structure](#structure)
 3. [Installation](#installation)
 4. [Utilisation](#utilisation)
