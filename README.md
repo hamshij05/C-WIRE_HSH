@@ -22,12 +22,12 @@ Le projet C-Wire vise à développer un système pour analyser les données de d
  Utilisation d'arbre AVL pour traiter efficacement les données : faire la somme des consommations d'un type de station. Etant donnée les nombreauses données et stations, nous allons passer par un AVL afin de limiter le temps de traitement.  
 
 ### **Structure :**
-  ●**`biblio.h`** : contient tous les bibliothèques utilisées  
-  ●**`Makefile`** : permet d'automatiser la compilation  
-  ●**`fonctions.c`** :  
-  ●**`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
+  - **`biblio.h`** : contient tous les bibliothèques utilisées  
+  - **`Makefile`** : permet d'automatiser la compilation  
+  - **`fonctions.c`** :  
+  - **`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
 
-**`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
+  - **`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
 
 
 
