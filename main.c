@@ -15,9 +15,9 @@ typedef struct electricite {
 
 // Fonction pour lire un fichier CSV et traiter les données
 void fichier_csv(const char* fichier) {
-    FILE* fichier=fopen("nomdefichier.txt", "r");
-    if (!file) {
-        perror("Erreur lors de l'ouverture du fichier");
+    FILE* fichier=fopen("c-wire_v00.csv", "r");
+    if (fichier==NULL) {
+        printf("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);
     }
 int main(){
