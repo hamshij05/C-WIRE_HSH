@@ -27,8 +27,6 @@ Le système est composé de :
 
   - **`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
 
-
-
 ## Auteurs    
 - **Hamshigaa JEKUMAR** - hamshij05  
 - **Sira DIAKITE** - Sira-la-Staaar  
