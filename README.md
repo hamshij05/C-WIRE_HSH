@@ -2,7 +2,7 @@
 ## **************CY Tech - C-WIRE**************
 
 ### ***Projet-semestre1 - PréIng2***
-**Bienvenue dans notre programme**
+## **Bienvenue dans notre programme**
 
 ## Sommaire
 1. [Description du projet](#description-du-projet)
