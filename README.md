@@ -16,7 +16,7 @@ Le projet C-Wire vise à développer un système pour analyser les données de d
 Le système est composé de :
 - **Un script Shell (`c-wire.sh`)** :
   Filtrer les données et orchestrer les traitements.  
--  **Un programme C** :  
+-  **Un programme C (`main.c` et `fonction.c`)** :  
  Utilisation d'arbre AVL pour traiter efficacement les données : faire la somme des consommations d'un type de station. Etant donnée les nombreauses données et stations, nous allons passer par un AVL afin de limiter le temps de traitement.  
 
 ## Structure 
