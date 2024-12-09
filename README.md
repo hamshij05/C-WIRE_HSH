@@ -5,7 +5,7 @@
 ## ***Projet-semestre1 - PréIng2***
 **Bienvenue dans notre programme**
 
-## Sommaire
+## -  Sommaire
 1. [Description du projet](#description-du-projet)
 2. [Structure](#structure)
 3. [Installation](#installation)
