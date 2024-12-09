@@ -6,8 +6,17 @@ typedef struct arbre{
   int elmt;
   struct arbre *fg;
   struct arbre *fd;
-  int equilibre;
+  int equilibre; //facteur d'équilibre
+  int hauteur;
 }Arbre;
+
+//Structure pour représenter les données électriques
+typedef struct electricite{
+  int identifiant;
+  int capacite; //capacité de la station
+  int consommation;  //consommation totale
+}Electricite;
+  
 
 //Création de noeud pour l'arbre AVL
 Arbre *creationarbre(int a){
@@ -19,6 +28,7 @@ Arbre *creationarbre(int a){
   nouveau->fg=NULL;
   nouveau->fd=NULL;
   nouveau->equilibre=0;
+  nouveau->hauteur=1;
   return nouveau;
 }
 
@@ -107,8 +117,21 @@ Arbre* doubleRotationDroite(Arbre* a){
     a->fg=rotationGauche(a->fg);
     return rotationDroite(a);
 }
+
 //Fonction pour calculer la hauteur de l'arbre AVL
+int hauteur(Arbre* a){
+  if(a==NULL){
+    return 0;
+  }
+  int hauteur_gauche=hauteur(a->fg);
+  int hauteur_droite=hauteur(a->fd);
+  return (hauteur_gauche>hauteur_droite?hauteur_gauche:hauteur_droite)+1;
+}
 
 //
 
 //La fonction pour mise à jour la hauteur d'un noeud apres modification
+
+//La fonction pour le parcourt l'AVL en ordre croissant
+
+
