@@ -14,12 +14,12 @@ Le projet C-Wire vise à développer un système pour analyser les données de d
 
 
 ### **Structure :**
-✱**`biblio.h`** : contient tous les bibliothèques utilisées  
-✱**`Makefile`** : permet d'automatiser la compilation  
-✱**`fonctions.c`** :  
-✱**`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
+**`biblio.h`** : contient tous les bibliothèques utilisées  
+**`Makefile`** : permet d'automatiser la compilation  
+**`fonctions.c`** :  
+**`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
 
-✱**`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
+**`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
 
 
 
