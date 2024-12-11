@@ -17,7 +17,6 @@ typedef struct electricite{
   int consommation;  //consommation totale
 }Electricite;
   
-
 //Création de noeud pour l'arbre AVL
 Arbre *creationarbre(int a){
   Arbre*nouveau=malloc(sizeof(Arbre));
@@ -130,7 +129,7 @@ int hauteur(Arbre* a){
 
 //
 
-//La fonction pour mise à jour la hauteur d'un noeud apres modification
+//La fonction pour mise à jour la hauteur d'un noeud après modification
 
 //La fonction pour le parcourt l'AVL en ordre croissant
 
