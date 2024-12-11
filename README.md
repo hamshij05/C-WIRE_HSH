@@ -35,6 +35,7 @@ Avant de commencer, assurez-vous les outils suivants sont installes sur votre sy
 
 Vous pouvez installer tous les outils via le gestionnaire de paquets de votre système d'exploitation, en écrivant ces commandes dans votre terminal.  
   `sudo apt -get update`
+    
     `sudo apt -get install bash awk gnuplot`
   
 ## Utilisation
