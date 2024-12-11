@@ -20,8 +20,9 @@ void fichier_csv(const char* fichier) {
         printf("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);
     }
+
 int main(){
-  FILE*fichier=fopen("fichier;txt","r");
+  FILE*fichier=fopen("c-wire.csv","r");
   
   const char* fichier_csv = "c-wire_000.csv";
 
