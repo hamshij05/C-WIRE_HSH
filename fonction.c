@@ -82,16 +82,13 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     return a;
 }
 
-//Créer l'arbre AVL à partir de la fichier CSV(FILE* fichier, int)
-Arbre* creationAVLfromCSV(FILE *file, int e, int *h){ // Creates avl from values gathered in csv file
-	if (root == NULL)
-	{
-		printf("root NULL in createavlfromcsv.\n");
+//Créer l'arbre AVL à partir de la fichier CSV
+Arbre* creationAVLfromCSV(FILE *fichier, int e, int *h){ // Creation l'arbre AVL à partir des données de la fichier CSV
+	if (e== NULL){
+		printf("noeud est NULL dans creationAVLfromCSV.\n");
 		exit(1);
 	}
 
-    int RouteID;
-    float distance;
 
     while (fscanf(file, "%d;%*d;%*[^;];%*[^;];%f;%*[^\n]", &RouteID, &distance) == 2)
     {
