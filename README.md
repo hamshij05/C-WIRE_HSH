@@ -24,10 +24,14 @@ Le système est composé de :
   - **`Makefile`** : permet d'automatiser la compilation  
   - **`fonctions.c`** :  hgvfxjgxkgfhghjv
   - **`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
-
   - **`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
 
 ## Installation
+-**Prerequis**  
+Avant de commencer, assurez-vous les outils suivants sont installes sur votre système :   
+- **`GnuPlot`** : pour la génération de graphiques
+- **`Bash`** : pour exécuter le script Shell
+- 
 
 ## Utilisation
 
