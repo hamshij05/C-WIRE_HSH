@@ -1,3 +1,4 @@
+#include biblio.h
 
 
 
@@ -132,5 +133,26 @@ int hauteur(Arbre* a){
 //La fonction pour mise à jour la hauteur d'un noeud après modification
 
 //La fonction pour le parcourt l'AVL en ordre croissant
+
+
+//Fonction pour modifier l'élément d'un nœud
+void modifierElement(Arbre a, int r) {
+    if (a == NULL) {
+        printf("Erreur : le nœud est NULL, modification impossible.\n");
+        exit(EXIT_FAILURE); //Terminer le programme en cas de nœud NULL
+    }
+    a->elmt = r;  //Modifier l'élément du nœud
+}
+
+//Parcours prefixe
+void prefixe (Arbre* a){
+    if (a!=NULL){
+        printf("%d\n",a->elmt);
+        prefixe(a->fg);
+        prefixe(a->fd);
+    }
+}
+
+
 
 
