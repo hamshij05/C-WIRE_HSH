@@ -31,7 +31,7 @@ Le système est composé de :
 Avant de commencer, assurez-vous les outils suivants sont installes sur votre système :   
 - **`GnuPlot`** : pour la génération de graphiques
 - **`Bash`** : pour exécuter le script Shell
-- 
+- **`grep et awk`** : pour des fonctions utiles pour le traitement de données
 
 ## Utilisation
 
