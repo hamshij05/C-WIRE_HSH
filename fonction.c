@@ -131,7 +131,9 @@ int hauteur(Arbre* a){
 //
 
 //La fonction pour mise à jour la hauteur d'un noeud après modification
-
+void miseAjour_hauteur(Arbre *a){
+if(a!=NULL){
+int hauteur_gauche=hauteur(a->
 //La fonction pour le parcourt l'AVL en ordre croissant
 
 
