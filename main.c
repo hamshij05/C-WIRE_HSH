@@ -31,3 +31,24 @@ int main(){
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/bin/bash
+
+    while getopts"nrt/k"opt
+    
