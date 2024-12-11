@@ -21,4 +21,6 @@ typedef struct electricite{
 }Electricite;
 
 
+Arbre *creationarbre(int a); //Création de noeud pour l'arbre AVL
+
 
