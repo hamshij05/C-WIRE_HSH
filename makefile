@@ -20,3 +20,9 @@ $(BUILD_DIR):
       mkdir -p $(BUILD_DIR)/
  clean:
     rm -rf $(BUILD_DIR)
+
+
+#premiere cible : sera executée en premier
+all:exec
+main.o: main.c fonction.c biblio.h
+      -gcc    
