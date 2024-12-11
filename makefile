@@ -25,4 +25,16 @@ $(BUILD_DIR):
 #premiere cible : sera executée en premier
 all:exec
 main.o: main.c fonction.c biblio.h
-      -gcc    
+      -gcc -c main.c -o main.o
+
+fonction_tri.o: fonction_biblio.c biblio.h
+      -gcc -c fonction_tri.c -o fonction_tri.o
+
+fonction_tableau.o: fonction_tableau.c tri.h
+      -gcc -c foncion_tableau.c -o fonction_tableau.o
+exec: main.o fonction_tri.o fonction_tableau.o
+      gcc fonction_tableau.o main.o fonction_tri.o -o exec
+#supprime tous les fichier objectifs
+clean:
+      rm -f *.o
+      rm exec
