@@ -31,9 +31,8 @@ Le système est composé de :
 Avant de commencer, assurez-vous les outils suivants sont installes sur votre système :   
 - **`GnuPlot`** : pour la génération de graphiques
 - **`Bash`** : pour exécuter le script Shell
-- **`grep et awk`** : pour des fonctions utiles pour le traitement de données  
-  Vous pouvez installer tous les outils via le gestionnaire de paquets de votre système d'exploitation, en écrivant ces commandes dans votre terminal.
-    `sudo apt-get update`
+- **`grep et awk`** : pour des fonctions utiles pour le traitement de données
+Vous pouvez installer tous les outils via le gestionnaire de paquets de votre système d'exploitation, en écrivant ces commandes dans votre terminal.  `sudo apt-get update`
   
 ## Utilisation
 
