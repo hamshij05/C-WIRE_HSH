@@ -82,6 +82,25 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     return a;
 }
 
+//Créer l'arbre AVL à partir de la fichier CSV(FILE* fichier, int)
+Arbre* creationAVLfromCSV(FILE *file, int e, int *h) // Creates avl from values gathered in csv file
+{
+	if (root == NULL)
+	{
+		printf("root NULL in createavlfromcsv.\n");
+		exit(1);
+	}
+
+    int RouteID;
+    float distance;
+
+    while (fscanf(file, "%d;%*d;%*[^;];%*[^;];%f;%*[^\n]", &RouteID, &distance) == 2)
+    {
+        root = InsertInAVL(root, RouteID, distance, h);
+    }
+
+    return root;
+}
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
   Arbre* pivot=a->fd;
@@ -146,15 +165,16 @@ void modifierElement(Arbre a, int r) {
     a->elmt = r;  //Modifier l'élément du nœud
 }
 
-//Parcours prefixe
-void prefixe (Arbre* a){
-    if (a!=NULL){
-        printf("%d\n",a->elmt);
-        prefixe(a->fg);
-        prefixe(a->fd);
-    }
+
+
+void freeAVL(pAVL root) // free AVL
+{
+	if (root != NULL) 
+	{
+		freeAVL(root->left);
+		freeAVL(root->right);
+		free(root);
+	}
 }
-
-
 
 
