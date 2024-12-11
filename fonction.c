@@ -83,8 +83,7 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
 }
 
 //Créer l'arbre AVL à partir de la fichier CSV(FILE* fichier, int)
-Arbre* creationAVLfromCSV(FILE *file, int e, int *h) // Creates avl from values gathered in csv file
-{
+Arbre* creationAVLfromCSV(FILE *file, int e, int *h){ // Creates avl from values gathered in csv file
 	if (root == NULL)
 	{
 		printf("root NULL in createavlfromcsv.\n");
@@ -167,7 +166,8 @@ void modifierElement(Arbre a, int r) {
 
 
 
-void freeAVL(pAVL root) // free AVL
+//Vid
+void freeAVL(pAVL root) 
 {
 	if (root != NULL) 
 	{
