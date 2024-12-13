@@ -22,7 +22,7 @@ Le système est composé de :
 ## Structure 
   - **`biblio.h`** : contient tous les bibliothèques utilisées, les définitions de les structures et les déclarations des fonctions.  
   - **`Makefile`** : permet d'automatiser la compilation  
-  - **`fonctions.c`** :  hgvfxjgxkgfhghjv
+  - **`fonctions.c`** : implémentation des fonctions déclarées dans biblio.h
   - **`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
   - **`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
 
