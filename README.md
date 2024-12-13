@@ -20,7 +20,7 @@ Le système est composé de :
  Utilisation d'arbre AVL pour traiter efficacement les données : faire la somme des consommations d'un type de station. Etant donnée les nombreauses données et stations, nous allons passer par un AVL afin de limiter le temps de traitement.  
 
 ## Structure 
-  - **`biblio.h`** : contient tous les bibliothèques utilisées  
+  - **`biblio.h`** : contient tous les bibliothèques utilisées, les définitions de les structures et les déclarations des fonctions.  
   - **`Makefile`** : permet d'automatiser la compilation  
   - **`fonctions.c`** :  hgvfxjgxkgfhghjv
   - **`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
