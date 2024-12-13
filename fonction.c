@@ -13,9 +13,9 @@ typedef struct arbre{
 
 //Structure pour représenter les données électriques
 typedef struct electricite{
-   int identifiant;
-   int capacite; //capacité de la station
-   int consommation;  //consommation totale
+   int identifiant[50];
+   long capacite; //capacité de la station
+   long consommation;  //consommation totale
 }Electricite;
   
 //Création de noeud pour l'arbre AVL
@@ -180,14 +180,12 @@ int recherche(Arbre *a, int e){
 
 //
 
-//Vid
-void freeAVL(pAVL root) 
-{
-	if (root != NULL) 
-	{
-		freeAVL(root->left);
-		freeAVL(root->right);
-		free(root);
+//Vider l'arbre AVL
+void freeAVL(Arbre a){
+	if (a != NULL){
+		freeAVL(a->fg);
+		freeAVL(a->fd);
+		free(a);
 	}
 }
 
