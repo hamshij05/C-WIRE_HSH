@@ -4,32 +4,32 @@
 
 //Structure d'Arbre AVL
 typedef struct arbre{
-  int elmt;
-  struct arbre *fg;
-  struct arbre *fd;
-  int equilibre; //facteur d'équilibre
-  int hauteur;
+   int elmt;
+   struct arbre *fg;
+   struct arbre *fd;
+   int equilibre; //facteur d'équilibre
+   int hauteur;
 }Arbre;
 
 //Structure pour représenter les données électriques
 typedef struct electricite{
-  int identifiant;
-  int capacite; //capacité de la station
-  int consommation;  //consommation totale
+   int identifiant;
+   int capacite; //capacité de la station
+   int consommation;  //consommation totale
 }Electricite;
   
 //Création de noeud pour l'arbre AVL
 Arbre *creationarbre(int a){
-  Arbre*nouveau=malloc(sizeof(Arbre));
-  if(nouveau==NULL){
-    exit(1);
-  }
-  nouveau->elmt=a;
-  nouveau->fg=NULL;
-  nouveau->fd=NULL;
-  nouveau->equilibre=0;
-  nouveau->hauteur=1;
-  return nouveau;
+	Arbre*nouveau=malloc(sizeof(Arbre));
+	if(nouveau==NULL){
+		exit(1);
+	}
+	nouveau->elmt=a;
+	nouveau->fg=NULL;
+	nouveau->fd=NULL;
+	nouveau->equilibre=0;
+	nouveau->hauteur=1;
+	return nouveau;
 }
 
 //Insertion de la fonction equilibre si nécessaire
@@ -97,6 +97,7 @@ Arbre* creationAVLfromCSV(FILE *fichier, int e, int *h){ // Creation l'arbre AVL
 
     return root;
 }
+
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
   Arbre* pivot=a->fd;
@@ -143,8 +144,6 @@ int hauteur(Arbre* a){
   return (hauteur_gauche>hauteur_droite?hauteur_gauche:hauteur_droite)+1;
 }
 
-//
-
 //La fonction pour mise à jour la hauteur d'un noeud après modification
 void miseAjour_hauteur(Arbre *a){
 if(a!=NULL){
@@ -161,7 +160,25 @@ void modifierElement(Arbre a, int r) {
     a->elmt = r;  //Modifier l'élément du nœud
 }
 
+//Fonction recherche
+int recherche(Arbre *a, int e){
+	if(a==NULL){
+		return NULL;
+	}
+	if(a->elmt == e){
+		return a;
+	}
+	else if (e < a->elmt){
+		return recherche(a->fg,e);
+	}
+	else {
+		return recherche(a->fd,e);
+	}
+}
 
+//Fonction suppression
+
+//
 
 //Vid
 void freeAVL(pAVL root) 
