@@ -196,9 +196,9 @@ void afficherDonnees(Arbre *a, int e){
 }
 
 //Fonction suppression
-Arbre *supprimerAVL(Arbre *a, int e, int *h) {
-	if (a==NULL){
-*h = 0;
+Arbre *supprimerAVL(Arbre *a, int e, int *h) 
+if (a==NULL){
+	*h = 0;
         return a;
     }
     else if(e > a->elmt){
