@@ -62,23 +62,23 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     return a;
 }
 
-//Fonction pour la lecture CSV et Insertion dans l’Arbre
-Arbre *creationAVLFromCSV(const char *fichier) {
-    FILE *fichier=fopen("c-wire_v00.csv", "r");
-    if (fichier==NULL) {
+/Fonction pour la lecture CSV et Insertion dans l’Arbre
+Arbre *creationAVLFromCSV(const char *file) {
+    FILE *file=fopen("c-wire_v00.csv", "r");
+    if (file==NULL) {
         printf("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);
     }
     Arbre *a = NULL;
     int h = 0;
     char ligne[1024];
-    while (fgets(ligne, sizeof(ligne), fichier)) {
+    while (fgets(ligne, sizeof(ligne), file)) {
         int e;
         if (sscanf(ligne, "%d", &e) == 1) {
             a = insertionAVL(a, e, &h);
         }
     }
-    fclose(fichier);
+    fclose(file);
     return a;
 }
 
@@ -247,7 +247,7 @@ Arbre *supprimerAVL(Arbre *a, int e, int *h) {
 void infixe(Arbre* a) { 
     if (a != NULL) {
         infixe(a->fg);
-        printf("Élément : %d, Équilibre " : %d\n", a->elmt, a->equilibre);
+        printf("Élément : %d, Équilibre : %d\n", a->elmt, a->equilibre);
         infixe(a->fd);
     }
 }
