@@ -76,7 +76,7 @@ Arbre *creationAVLFromCSV(const char *fichier) {
     char ligne[1024];
     while (fgets(ligne, sizeof(ligne), fichier)) {
         int e;
-        if (scanf(ligne, "%d", &e) == 1) {
+        if (sscanf(ligne, "%d", &e) == 1) {
             a = insertionAVL(a, e, &h);
         }
     }
@@ -101,7 +101,7 @@ Arbre *rotationGauche(Arbre *a){
 Arbre *rotationDroite(Arbre *a){
   Arbre* pivot=a->fg;
   int eq_a=a->equilibre;
-  int eq_p=pivt->equilibre;
+  int eq_p=pivot->equilibre;
 
   pivot->fd=a;
   a-equilibre=eq_a-min(eq_p,0)+1;
@@ -123,23 +123,24 @@ Arbre* doubleRotationDroite(Arbre* a){
 
 //Insertion de la fonction equilibre si nécessaire
 Arbre *equilibrageAVL(Arbre*a){
-  if(a->equilibre>=2){
-    if(a->fd->equilibre>=0){
-      return rotationGauche(a);
-    else{
-      return doubleRotationGauche(a);
+	if(a->equilibre>=2){
+		if(a->fd->equilibre>=0){
+			return rotationGauche(a);
+		}
+			else{
+				return doubleRotationGauche(a);
     }
   }
-  else(a->equilibre<=-2){
-    if(a-fg-equilibre<=0){
-      return rotationDroite(a);
-    }
-    else{
-      return doubleRotationDroite(a);
-    }
-    }
-    return a;
-  }
+	else(a->equilibre<=-2){
+		if(a-fg-equilibre<=0){
+			return rotationDroite(a);
+		}
+		else{
+			return doubleRotationDroite(a);
+		}
+	}
+	return a;
+}
 
 //Fonction pour calculer la hauteur de l'arbre AVL
 int hauteur(Arbre* a){
@@ -152,9 +153,12 @@ int hauteur(Arbre* a){
 }
 
 //La fonction pour mise à jour la hauteur d'un noeud après modification
-void miseAjour_hauteur(Arbre *a){
-if(a!=NULL){
-int hauteur_gauche=hauteur(a->
+void miseAjour_hauteur(Arbre *a) {
+    if (a!= NULL) {
+        a->hauteur = 1 + (hauteur(a->fg) > hauteur(a->fd) ? hauteur(a->fg) : hauteur(a->fd));
+    }
+}
+
 //La fonction pour le parcourt l'AVL en ordre croissant
 
 
@@ -195,6 +199,49 @@ void afficherDonnees(Arbre *a, int e){
 }
 
 //Fonction suppression
+Arbre *supprimerAVL(Arbre *a, int e, int *h) {
+    if (a == NULL) {
+        *h = 0;
+        return NULL;
+    }
+
+    if (e < a->elmt) {
+        a->fg = supprimerAVL(a->fg, e, h);
+        *h = -*h;
+    } else if (e > a->elmt) {
+        a->fd = supprimerAVL(a->fd, e, h);
+    } else { // Élément trouvé
+        if (a->fg == NULL) {
+            Arbre *temp = a->fd;
+            free(a);
+            *h = -1;
+            return temp;
+        } else if (a->fd == NULL) {
+            Arbre *temp = a->fg;
+            free(a);
+            *h = -1;
+            return temp;
+        } else { // Deux enfants
+            Arbre *temp = a->fd;
+            while (temp->fg != NULL) {
+                temp = temp->fg;
+            }
+            a->elmt = temp->elmt;
+            a->fd = supprimerAVL(a->fd, temp->elmt, h);
+        }
+    }
+
+    if (*h != 0) {
+        a->equilibre += *h;
+        a = equilibrageAVL(a);
+        if (a->equilibre == 0) {
+            *h = -1;
+        } else {
+            *h = 1;
+        }
+    }
+    return a;
+}
 
 //Parcours infixe
 void infixe(Arbre* a) { 
