@@ -143,7 +143,18 @@ else
 		echo "Erreur: impossibilité de créer le dossier graphs"
 		exit 1
 	fi
-fi	
+fi
+	
 debut_chrono
+nom_fichier="${2}_${3}.csv"
+touch "$nom_fichier"
+if [ $? -ne 0 ];
+		then 
+		echo "Erreur: impossibilité de créer le fichier demandé"
+		fin_chrono
+		exit 1
+fi
+
+
 fin_chrono
 	
