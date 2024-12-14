@@ -196,20 +196,43 @@ void afficherDonnees(Arbre *a, int e){
 }
 
 //Fonction suppression
-Arbre *supprimerAVL(Arbre *a, int e, int *h) 
-if (a==NULL){
-	*h = 0;
+Arbre *suppressionAVL(Arbre *a, int e, int *h) {
+    if (a==NULL){
+        *h = 0;
         return a;
     }
-    else if(e > a->elmt){
-        a->fg = supprimerAVL(a->fg, e);
-        *h = -*h;
-    } 
     else if (e > a->elmt){
-        a->fd = supprimerAVL(a->fd, e);
+        a->fd = suppressionAVL(a->fd, e);
     }
-else if(existeFilsDroite->a)
-		    a->fd=suppMinAVL(a->fd, h, &(a->elmt))
+    else if(e < a->elmt){
+        a->fg = suppressionAVL(a->fg, e);
+        *h = -*h;
+    }
+    else if(existeFilsDroite->a){
+        a->fd=suppMinAVL(a->fd, h, &(a->elmt))
+    }
+    else{
+        tmp=a;
+        a=a->fg;
+        free(tmp);
+        *h=-1;
+        return(a);
+    }
+    if(a==NULL){
+        return a;
+    }
+    if(*h!=0){
+        a->equilibre=a->equilibre+*h;
+        if(a->equilibre==0){
+            *h=-1;
+        }
+        else{
+            *h=0;
+        }
+    }
+    return a;
+}
+
     else{
         if (a->fg == NULL) {
             Arbre *temp = a->fd;
