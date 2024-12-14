@@ -40,3 +40,46 @@ fi
 
 
 echo "Station: $station, Conso: $conso"
+# Nom de l'exécutable et du fichier source
+EXECUTABLE="mon_programme"
+SOURCE="mon_programme.c"
+
+# Vérification de la présence du fichier source C
+if [ ! -f "$SOURCE" ]; then
+    echo "Erreur : Le fichier source $SOURCE est introuvable."
+    exit 1
+fi
+
+# Vérification de la présence de l'exécutable
+if [ ! -f "$EXECUTABLE" ]; then
+    echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation..."
+    
+    # Lancer la compilation
+    gcc "$SOURCE" -o "$EXECUTABLE"
+    
+    # Vérification de la réussite de la compilation
+    if [ $? -ne 0 ]; then
+        echo "Erreur : La compilation a échoué."
+        exit 1
+    fi
+    
+    echo "Compilation réussie. Exécutable $EXECUTABLE généré."
+fi
+
+# Vérification que l'exécutable est bien créé
+if [ ! -f "$EXECUTABLE" ]; then
+    echo "Erreur : L'exécutable $EXECUTABLE est introuvable même après compilation."
+    exit 1
+fi
+
+# Exécuter le programme avec les arguments donnés
+echo "Exécution de l'exécutable $EXECUTABLE avec les arguments : $@"
+./"$EXECUTABLE" "$@"
+
+# Vérification du succès de l'exécution
+if [ $? -ne 0 ]; then
+    echo "Erreur : L'exécution du programme a échoué."
+    exit 1
+fi
+
+echo "Traitement terminé avec succès."
