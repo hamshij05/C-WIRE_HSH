@@ -1,9 +1,22 @@
 #!/bin/bash
 
+# Fonction pour démarrer le chronomètre
+debut_chrono() {
+    temps_1=$(date +%s.%N)
+}
+
+# Fonction pour arrête le chronomètre et afficher la durée
+fin_chrono() {
+    temps_2=$(date +%s.%N)
+    temps=$(echo "$temps_2 - $temps_1" | bc)
+    echo "Durée utile du traitement : ${temps} sec"
+}
+
 
 if [ $# -lt 1 ]; 
 	then
 	echo "Problème: nombre d'argument insuffisant"
+ 	echo "Durée utile du traitement : 0.0 sec"
 	#appel la fonction option aide
 	exit 1
 fi
@@ -23,6 +36,7 @@ elif [ "$2" = "lv" ];
 	station=3
 else
 	echo "Problème: mauvaise station argument"
+ 	echo "Durée utile du traitement : 0.0 sec"
 	#appel la fonction option aide
 	exit 1
 fi
@@ -38,6 +52,7 @@ elif [ "$3" = "all" ];
 	conso=3
 else
 	echo "Problème: mauvais consommateur argument"
+ 	echo "Durée utile du traitement : 0.0 sec"
 	#appel la fonction option aide
 	exit 1
 fi
@@ -128,6 +143,7 @@ else
 		echo "Erreur: impossibilité de créer le dossier graphs"
 		exit 1
 	fi
-fi				
-			
+fi	
+debut_chrono
+fin_chrono
 	
