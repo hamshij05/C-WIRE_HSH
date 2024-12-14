@@ -4,11 +4,13 @@
 if [ $# -lt 1 ]; 
 	then
 	echo "Problème: nombre d'argument insuffisant"
+	#appel la fonction option aide
 	exit 1
 fi
 
 station=0
 conso=0
+plant=0
 
 if [ "$2" = "hvb" ]; 
 	then
@@ -21,9 +23,10 @@ elif [ "$2" = "lv" ];
 	station=3
 else
 	echo "Problème: mauvaise station argument"
+	#appel la fonction option aide
 	exit 1
 fi
- 
+		
 elif [ "$3" = "comp" ]; 
 	then
 	conso=1
@@ -35,40 +38,48 @@ elif [ "$3" = "all" ];
 	conso=3
 else
 	echo "Problème: mauvais consommateur argument"
+	#appel la fonction option aide
 	exit 1
 fi
 
 
+$plant="$4"
+
+
 #echo "Station: $station, Conso: $conso"
-# Nom de l'exécutable (défini dans le Makefile)
-EXECUTABLE="mon_programme"
+
+
+EXECUTABLE="main"
 
 # Vérification de la présence du Makefile
-if [ ! -f "Makefile" ]; then
-    echo "Erreur : Le fichier Makefile est introuvable."
-    exit 1
+if [ ! -f "makefile" ];
+	then
+	echo "Erreur: Le fichier Makefile est introuvable."
+	exit 1
 fi
 
 # Vérification de la présence de l'exécutable
-if [ ! -f "$EXECUTABLE" ]; then
-    echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation avec make..."
+if [ ! -f "$EXECUTABLE" ];
+	then
+	echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation"
     
-    # Lancer la compilation avec le Makefile
-    make "$EXECUTABLE"
+	# lancer la compilation avec le Makefile
+	make "$EXECUTABLE"
     
-    # Vérification si make a réussi
-    if [ $? -ne 0 ]; then
-        echo "Erreur : La compilation avec make a échoué."
-        exit 1
-    fi
+	# Vérification si make a réussi
+	if [ $? -ne 0 ]; then
+		echo "Erreur: La compilation avec make a échoué."
+        	exit 1
+	fi
     
-    echo "Compilation réussie. Exécutable $EXECUTABLE généré."
+	echo "Compilation réussie. Exécutable $EXECUTABLE généré."
 fi
 
 # Vérification que l'exécutable a bien été créé
-if [ ! -f "$EXECUTABLE" ]; then
-    echo "Erreur : L'exécutable $EXECUTABLE est introuvable même après compilation."
-    exit 1
+if [ ! -f "$EXECUTABLE" ];
+	then
+	echo "Erreur: L'exécutable $EXECUTABLE est introuvable même après compilation."
+	exit 1
 fi
 
 # Exécuter l'exécutable avec les arguments donnés
@@ -76,9 +87,47 @@ echo "Exécution de l'exécutable $EXECUTABLE avec les arguments : $@"
 ./"$EXECUTABLE" "$@"
 
 # Vérification de la réussite de l'exécution
-if [ $? -ne 0 ]; then
-    echo "Erreur : L'exécution du programme a échoué."
-    exit 1
+if [ $? -ne 0 ]; 
+	then
+	echo "Erreur : L'exécution du programme a échoué."
+	exit 1
 fi
 
-echo "Traitement terminé avec succès."
+#dossier tmp
+if [  -d "tmp" ];
+	then
+	rm -rf tmp/*
+	if [ $? -ne 0 ];
+		then
+		echo "Erreur: impossible de vider le dossier, tmp déjà existant"
+		exit 1
+	fi
+else
+	mkdir tmp
+	if [ $? -ne 0 ];
+		then
+		echo "Erreur: impossible de créer temp"
+		exit 1
+	fi			
+
+fi
+
+#dossier graphs
+if [ -d "graphs" ];
+	then
+	rm -rf tmp/*
+	if [ $? -ne 0 ]
+		then
+		echo "Erreur: impossibilité de vider le dossier graphs"
+		exit 1
+	fi
+else 
+	mkdir graphs
+	if [ $? -ne 0 ];
+		then 
+		echo "Erreur: impossibilité de créer le dossier graphs"
+		exit 1
+	fi
+fi				
+			
+	
