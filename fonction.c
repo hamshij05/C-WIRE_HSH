@@ -197,8 +197,8 @@ void afficherDonnees(Arbre *a, int e){
 
 //Fonction suppression
 Arbre *supprimerAVL(Arbre *a, int e, int *h) {
-    if (a==NULL){
-        *h = 0;
+	if (a==NULL){
+*h = 0;
         return a;
     }
     else if(e > a->elmt){
@@ -208,8 +208,8 @@ Arbre *supprimerAVL(Arbre *a, int e, int *h) {
     else if (e > a->elmt){
         a->fd = supprimerAVL(a->fd, e);
     }
-	    else if(existeFilsDroite->a)
-		    a->fd=suppMinAVL(a->fd, h, a->elmt->adresse)
+else if(existeFilsDroite->a)
+		    a->fd=suppMinAVL(a->fd, h, &(a->elmt))
     else{
         if (a->fg == NULL) {
             Arbre *temp = a->fd;
