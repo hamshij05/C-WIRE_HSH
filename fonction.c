@@ -64,25 +64,25 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
 
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(const char *fichier) {
-    FILE *fichier = fopen(filename, "r");
-    if (!fichier) {
-        perror("Erreur lors de l'ouverture du fichier CSV");
-        return NULL;
+    FILE *fichier=fopen("c-wire_v00.csv", "r");
+    if (fichier==NULL) {
+        printf("Erreur lors de l'ouverture du fichier");
+        exit(EXIT_FAILURE);
     }
 
-    Arbre *root = NULL;
+    Arbre *a = NULL;
     int h = 0;
 
     char ligne[1024];
     while (fgets(ligne, sizeof(ligne), fichier)) {
-        int valeur;
-        if (sscanf(ligne, "%d", &valeur) == 1) {
-            root = insertionAVL(root, valeur, &h);
+        int e;
+        if (scanf(ligne, "%d", &e) == 1) {
+            a = insertionAVL(a, e, &h);
         }
     }
 
     fclose(fichier);
-    return root;
+    return a;
 }
 
 //Rotation gauche pour rééquilibrer l'arbre
@@ -183,6 +183,17 @@ int recherche(Arbre *a, int e){
 	}
 }
 
+//Fonction pour afficher les données
+void afficherDonnees(Arbre *a, int e){
+    Arbre *noeud = recherche(a, e);
+    if (noeud != NULL){
+        printf("Élément trouvé : %d, Équilibre : %d, Hauteur : %d\n", noeud->elmt, noeud->equilibre, hauteur(noeud));
+    } 
+    else{
+        printf("Élément non trouvé dans l'arbre.\n");
+    }
+}
+
 //Fonction suppression
 
 //Parcours infixe
@@ -210,6 +221,22 @@ void freeAVL(Arbre a){
 		freeAVL(a->fd);
 		free(a);
 	}
+}
+
+//Vérification l'equilibre 
+int verifierEquilibre(Arbre *a) {
+    if (a == NULL) {
+        return 1;
+    }
+    int hauteurGauche = hauteur(a->fg);
+    int hauteurDroite = hauteur(a->fd);
+    int equilibre = hauteurGauche - hauteurDroite;
+
+    if (equilibre < -1 || equilibre > 1) {
+        printf("Déséquilibre détecté au nœud %d\n", a->elmt);
+        return 0;
+    }
+    return verifierEquilibre(a->fg) && verifierEquilibre(a->fd);
 }
 
 
