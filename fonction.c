@@ -82,22 +82,6 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     return a;
 }
 
-//Créer l'arbre AVL à partir de la fichier CSV
-Arbre* creationAVLfromCSV(FILE *fichier, int e, int *h){ // Creation l'arbre AVL à partir des données de la fichier CSV
-	if (e== NULL){
-		printf("noeud est NULL dans creationAVLfromCSV.\n");
-		exit(1);
-	}
-
-
-    while (fscanf(file, "%d;%*d;%*[^;];%*[^;];%f;%*[^\n]", &RouteID, &distance) == 2)
-    {
-        root = InsertInAVL(root, RouteID, distance, h);
-    }
-
-    return root;
-}
-
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
   Arbre* pivot=a->fd;
@@ -178,7 +162,23 @@ int recherche(Arbre *a, int e){
 
 //Fonction suppression
 
-//
+//Parcours infixe
+void infixe(Arbre* a) { 
+    if (a != NULL) {
+        infixe(a->fg);
+        printf("Élément : %d, Équilibre " : %d\n", a->elmt, a->equilibre);
+        infixe(a->fd);
+    }
+}
+
+//Fonction pour exporter les données dans un fichier
+void exportaCSV(Arbre *a, FILE *fichier) {
+    if (a != NULL) {
+        exportaCSV(a->fg, fichier);
+        fprintf(fichier, "%d\n", a->elmt);
+        exportaCSV(a->fd, fichier);
+    }
+}
 
 //Vider l'arbre AVL
 void freeAVL(Arbre a){
