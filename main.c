@@ -65,6 +65,28 @@ int main(int argc, char *argv[])
 
 
 
+//Fonction pour la lecture CSV et Insertion dans l’Arbre
+Arbre *creationAVLFromCSV(const char *filename) {
+    FILE *fichier = fopen(filename, "r");
+    if (!fichier) {
+        perror("Erreur lors de l'ouverture du fichier CSV");
+        return NULL;
+    }
+
+    Arbre *root = NULL;
+    int h = 0;
+
+    char ligne[1024];
+    while (fgets(ligne, sizeof(ligne), fichier)) {
+        int valeur;
+        if (sscanf(ligne, "%d", &valeur) == 1) {
+            root = insertionAVL(root, valeur, &h);
+        }
+    }
+
+    fclose(fichier);
+    return root;
+}
 
 
 
