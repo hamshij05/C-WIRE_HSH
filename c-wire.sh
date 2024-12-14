@@ -39,44 +39,43 @@ else
 fi
 
 
-echo "Station: $station, Conso: $conso"
-# Nom de l'exécutable et du fichier source
+#echo "Station: $station, Conso: $conso"
+# Nom de l'exécutable (défini dans le Makefile)
 EXECUTABLE="mon_programme"
-SOURCE="mon_programme.c"
 
-# Vérification de la présence du fichier source C
-if [ ! -f "$SOURCE" ]; then
-    echo "Erreur : Le fichier source $SOURCE est introuvable."
+# Vérification de la présence du Makefile
+if [ ! -f "Makefile" ]; then
+    echo "Erreur : Le fichier Makefile est introuvable."
     exit 1
 fi
 
 # Vérification de la présence de l'exécutable
 if [ ! -f "$EXECUTABLE" ]; then
-    echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation..."
+    echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation avec make..."
     
-    # Lancer la compilation
-    gcc "$SOURCE" -o "$EXECUTABLE"
+    # Lancer la compilation avec le Makefile
+    make "$EXECUTABLE"
     
-    # Vérification de la réussite de la compilation
+    # Vérification si make a réussi
     if [ $? -ne 0 ]; then
-        echo "Erreur : La compilation a échoué."
+        echo "Erreur : La compilation avec make a échoué."
         exit 1
     fi
     
     echo "Compilation réussie. Exécutable $EXECUTABLE généré."
 fi
 
-# Vérification que l'exécutable est bien créé
+# Vérification que l'exécutable a bien été créé
 if [ ! -f "$EXECUTABLE" ]; then
     echo "Erreur : L'exécutable $EXECUTABLE est introuvable même après compilation."
     exit 1
 fi
 
-# Exécuter le programme avec les arguments donnés
+# Exécuter l'exécutable avec les arguments donnés
 echo "Exécution de l'exécutable $EXECUTABLE avec les arguments : $@"
 ./"$EXECUTABLE" "$@"
 
-# Vérification du succès de l'exécution
+# Vérification de la réussite de l'exécution
 if [ $? -ne 0 ]; then
     echo "Erreur : L'exécution du programme a échoué."
     exit 1
