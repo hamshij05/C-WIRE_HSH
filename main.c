@@ -13,14 +13,25 @@ typedef struct electricite {
     long capacite;
 }Electricite;
 
-// Fonction pour lire un fichier CSV et traiter les données
-void fichier_csv(const char* fichier,insertionAVL,) {
-    FILE* fichier=fopen("c-wire_v00.csv", "r");
-    if (fichier==NULL) {
+//Fonction pour la lecture CSV et Insertion dans l’Arbre
+Arbre *creationAVLFromCSV(const char *file) {
+    FILE *file=fopen("c-wire_v00.csv", "r");
+    if (file==NULL) {
         printf("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);
     }
-FILE*fichier=fopen("c-wire.csv","r")
+    Arbre *a = NULL;
+    int h = 0;
+    char ligne[1024];
+    while (fgets(ligne, sizeof(ligne), file)) {
+        int e;
+        if (sscanf(ligne, "%d", &e) == 1) {
+            a = insertionAVL(a, e, &h);
+        }
+    }
+    fclose(file);
+    return a;
+}
 
 int parseCSV(const char *filename, AVLNode **root) {
    
