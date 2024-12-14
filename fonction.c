@@ -32,26 +32,6 @@ Arbre *creationarbre(int a){
 	return nouveau;
 }
 
-//Insertion de la fonction equilibre si nécessaire
-Arbre *equilibrageAVL(Arbre*a){
-  if(a->equilibre>=2){
-    if(a->fd->equilibre>=0){
-      return rotationGauche(a);
-    else{
-      return doubleRotationGauche(a);
-    }
-  }
-  else(a->equilibre<=-2){
-    if(a-fg-equilibre<=0){
-      return rotationDroite(a);
-    }
-    else{
-      return doubleRotationDroite(a);
-    }
-    }
-    return a;
-  }
-
 //Insertion de l'arbre AVL
 Arbre *insertionAVL(Arbre *a, int e, int *h){
     if (a==NULL){
@@ -80,6 +60,29 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
         }
     }
     return a;
+}
+
+//Fonction pour la lecture CSV et Insertion dans l’Arbre
+Arbre *creationAVLFromCSV(const char *fichier) {
+    FILE *fichier = fopen(filename, "r");
+    if (!fichier) {
+        perror("Erreur lors de l'ouverture du fichier CSV");
+        return NULL;
+    }
+
+    Arbre *root = NULL;
+    int h = 0;
+
+    char ligne[1024];
+    while (fgets(ligne, sizeof(ligne), fichier)) {
+        int valeur;
+        if (sscanf(ligne, "%d", &valeur) == 1) {
+            root = insertionAVL(root, valeur, &h);
+        }
+    }
+
+    fclose(fichier);
+    return root;
 }
 
 //Rotation gauche pour rééquilibrer l'arbre
@@ -117,6 +120,26 @@ Arbre* doubleRotationDroite(Arbre* a){
     a->fg=rotationGauche(a->fg);
     return rotationDroite(a);
 }
+
+//Insertion de la fonction equilibre si nécessaire
+Arbre *equilibrageAVL(Arbre*a){
+  if(a->equilibre>=2){
+    if(a->fd->equilibre>=0){
+      return rotationGauche(a);
+    else{
+      return doubleRotationGauche(a);
+    }
+  }
+  else(a->equilibre<=-2){
+    if(a-fg-equilibre<=0){
+      return rotationDroite(a);
+    }
+    else{
+      return doubleRotationDroite(a);
+    }
+    }
+    return a;
+  }
 
 //Fonction pour calculer la hauteur de l'arbre AVL
 int hauteur(Arbre* a){
