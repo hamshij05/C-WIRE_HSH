@@ -62,7 +62,7 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     return a;
 }
 
-/Fonction pour la lecture CSV et Insertion dans l’Arbre
+//Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(const char *file) {
     FILE *file=fopen("c-wire_v00.csv", "r");
     if (file==NULL) {
