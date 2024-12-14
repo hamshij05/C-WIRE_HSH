@@ -69,10 +69,8 @@ Arbre *creationAVLFromCSV(const char *fichier) {
         printf("Erreur lors de l'ouverture du fichier");
         exit(EXIT_FAILURE);
     }
-
     Arbre *a = NULL;
     int h = 0;
-
     char ligne[1024];
     while (fgets(ligne, sizeof(ligne), fichier)) {
         int e;
@@ -80,7 +78,6 @@ Arbre *creationAVLFromCSV(const char *fichier) {
             a = insertionAVL(a, e, &h);
         }
     }
-
     fclose(fichier);
     return a;
 }
@@ -200,17 +197,20 @@ void afficherDonnees(Arbre *a, int e){
 
 //Fonction suppression
 Arbre *supprimerAVL(Arbre *a, int e, int *h) {
-    if (a == NULL) {
+    if (a==NULL){
         *h = 0;
-        return NULL;
+        return a;
     }
-
-    if (e < a->elmt) {
-        a->fg = supprimerAVL(a->fg, e, h);
+    else if(e > a->elmt){
+        a->fg = supprimerAVL(a->fg, e);
         *h = -*h;
-    } else if (e > a->elmt) {
-        a->fd = supprimerAVL(a->fd, e, h);
-    } else { // Élément trouvé
+    } 
+    else if (e > a->elmt){
+        a->fd = supprimerAVL(a->fd, e);
+    }
+	    else if(existeFilsDroite->a)
+		    a->fd=suppMinAVL(a->fd, h, a->elmt->adresse)
+    else{
         if (a->fg == NULL) {
             Arbre *temp = a->fd;
             free(a);
@@ -270,7 +270,7 @@ void freeAVL(Arbre a){
 	}
 }
 
-//Vérification l'equilibre 
+//Vérification l'équilibre 
 int verifierEquilibre(Arbre *a) {
     if (a == NULL) {
         return 1;
