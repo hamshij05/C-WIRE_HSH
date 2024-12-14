@@ -115,7 +115,7 @@ fi
 #dossier graphs
 if [ -d "graphs" ];
 	then
-	rm -rf tmp/*
+	rm -rf graphs/*
 	if [ $? -ne 0 ]
 		then
 		echo "Erreur: impossibilité de vider le dossier graphs"
