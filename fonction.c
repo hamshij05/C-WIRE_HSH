@@ -82,6 +82,14 @@ Arbre *creationAVLFromCSV(const char *file) {
     return a;
 }
 
+//Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
+int min(int a, int b) {
+    return (a < b) ? a : b;
+}
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
   Arbre* pivot=a->fd;
