@@ -7,12 +7,17 @@ fin_chrono() {
     echo "Durée utile du traitement : ${temps} sec"
 }
 
-aide() {
-    echo "Usage: $0 <station> <type> <parametre>"
+aide() { 
+    echo "Usage: bash <chemin(c-wire.sh)> <station> <consommateur> (<id centrale>)"
     echo "station : hvb, hva, lv"
     echo "type : comp, indiv, all"
-    echo "parametre : nom du fichier ou autre"
+    echo "chemin : nom du fichier ou autre"
+    echo "PS: une hva et une hvb ne peut avoir comme consommateur qu'une entreprise (comp)"  
     exit 1
+}
+
+nom_fichier() {
+nom_fichier="${1}_${2}.csv"
 }
 
 
@@ -20,7 +25,7 @@ if [ $# -lt 1 ];
 	then
 	echo "Problème: nombre d'argument insuffisant"
  	echo "Durée utile du traitement : 0.0 sec"
-	#aide
+	aide
 	exit 1
 fi
 
@@ -40,7 +45,7 @@ elif [ "$2" = "lv" ];
 else
 	echo "Problème: mauvaise station argument"
  	echo "Durée utile du traitement : 0.0 sec"
-	#appel la fonction option aide
+	aide
 	exit 1
 fi
 		
@@ -49,14 +54,32 @@ if [ "$3" = "comp" ];
 	conso=1
 elif [ "$3" = "indiv" ]; 
 	then
+	if [ "$station" = 1 ]
+		then
+		aide
+		exit 1
+	elif [ "$station" = 2	]
+		then 
+		aide
+		exit 1
+	fi	 
 	conso=2
 elif [ "$3" = "all" ]; 
 	then
+	if [ "$station" = 1 ]
+		then
+		aide
+		exit 1
+	elif [ "$station" = 2	]
+		then 
+		aide
+		exit 1	
+	fi	
 	conso=3
 else
 	echo "Problème: mauvais consommateur argument"
  	echo "Durée utile du traitement : 0.0 sec"
-	#appel la fonction option aide
+	aide
 	exit 1
 fi
 
@@ -149,14 +172,19 @@ else
 fi
 	
 temps_1=$(date +%s.%N)
-nom_fichier="${2}_${3}.csv"
-touch "$nom_fichier"
+
+name_file1="hvb_comp.csv"
+cd tmp
+touch "$name_file1"
 if [ $? -ne 0 ];
 		then 
-		echo "Erreur: impossibilité de créer le fichier demandé"
+		echo "Erreur: impossibilité de créer le fichier demandé $name_file"
 		fin_chrono $temps_1
   		exit 1
 fi
+head -n 1 c-wire_v00.csv > $name_file1
+grep -E "[1-9];[1-9]+;-;-;[1-9]+;-;-;[1-9]+" c-wire_v00.csv | cut -d":" -f1 > $name_file1
+#grep -E "^[1-9];[1-9]+;-;-;" c-wire_v00.csv | cut -d":" -f1 > $name_file1
 
 
 fin_chrono
