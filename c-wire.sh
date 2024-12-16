@@ -12,12 +12,20 @@ fin_chrono() {
     echo "Durée utile du traitement : ${temps} sec"
 }
 
+aide() {
+    echo "Usage: $0 <station> <type> <parametre>"
+    echo "station : hvb, hva, lv"
+    echo "type : comp, indiv, all"
+    echo "parametre : nom du fichier ou autre"
+    exit 1
+}
+
 
 if [ $# -lt 1 ]; 
 	then
 	echo "Problème: nombre d'argument insuffisant"
  	echo "Durée utile du traitement : 0.0 sec"
-	#appel la fonction option aide
+	#aide
 	exit 1
 fi
 
