@@ -307,6 +307,104 @@ int verifierEquilibre(Arbre *a) {
 }
 
 //Fonction pour calculer la somme 
+// Fonction pour calculer la somme des consommations totales associées 
+long sommeConsommation(Arbre *a, Electricite *data, int taille) {
+    if (a == NULL) {
+        return 0;
+    }
+
+    long somme = 0;
+
+    // Trouver l'identifiant correspondant dans le tableau de structures Electricite
+    for (int i = 0; i < taille; i++) {
+        if (data[i].identifiant[0] == a->elmt) { // On suppose que identifiant[0] est utilisé comme clé unique
+            somme += data[i].consommation;
+            break;
+        }
+    }
+
+    // Parcours infixe pour visiter tous les nœuds
+    somme += sommeConsommation(a->fg, data, taille);
+    somme += sommeConsommation(a->fd, data, taille);
+
+    return somme;
+}
+
+// Fonction pour calculer la somme des consommations totales associées 
+
+long sommeConsommation(Arbre *a, Electricite *data, int taille) {
+    if (a == NULL) {
+        return 0;
+    }
+
+    long somme = 0;
+
+    // Trouver l'identifiant correspondant dans le tableau de structures Electricite
+    for (int i = 0; i < taille; i++) {
+        if (data[i].identifiant[0] == a->elmt) { // On suppose que identifiant[0] est utilisé comme clé unique
+            somme += data[i].consommation;
+            break;
+        }
+    }
+
+    // Parcours infixe pour visiter tous les nœuds
+    somme += sommeConsommation(a->fg, data, taille);
+    somme += sommeConsommation(a->fd, data, taille);
+
+    return somme;
+}
+
+
 
 //Fonction pour vérifier la surproduction
+// Fonction pour calculer la somme des consommations totales associées 
+long sommeConsommation(Arbre *a, Electricite *data, int taille) {
+    if (a == NULL) {
+        return 0;
+    }
+
+    long somme = 0;
+
+    // Trouver l'identifiant correspondant dans le tableau de structures Electricite
+    for (int i = 0; i < taille; i++) {
+        if (data[i].identifiant[0] == a->elmt) { // On suppose que identifiant[0] est utilisé comme clé unique
+            somme += data[i].consommation;
+            break;
+        }
+    }
+
+    // Parcours infixe pour visiter tous les nœuds
+    somme += sommeConsommation(a->fg, data, taille);
+    somme += sommeConsommation(a->fd, data, taille);
+
+    return somme;
+}
+
+// Fonction pour vérifier la surproduction
+typedef struct surproduction {
+    int identifiant;
+    long difference; // Différence entre la capacité et la consommation
+} Surproduction;
+
+void verifierSurproduction(Arbre *a, Electricite *data, int taille) {
+    if (a == NULL) {
+        return;
+    }
+
+    // Trouver l'identifiant correspondant dans le tableau de structures Electricite
+    for (int i = 0; i < taille; i++) {
+        if (data[i].identifiant[0] == a->elmt) {
+            long difference = data[i].capacite - data[i].consommation;
+            if (difference < 0) {
+                printf("Surproduction détectée pour l'identifiant %d : excès de %ld\n", data[i].identifiant[0], -difference);
+            }
+            break;
+        }
+    }
+
+    // Vérifier la surproduction pour les sous-arbres
+    verifierSurproduction(a->fg, data, taille);
+    verifierSurproduction(a->fd, data, taille);
+}
+
 
