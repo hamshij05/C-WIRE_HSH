@@ -58,7 +58,7 @@ else
 fi
 
 
-$plant="$4"
+plant="$4"
 
 
 #echo "Station: $station, Conso: $conso"
