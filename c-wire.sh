@@ -41,7 +41,7 @@ else
 	exit 1
 fi
 		
-elif [ "$3" = "comp" ]; 
+if [ "$3" = "comp" ]; 
 	then
 	conso=1
 elif [ "$3" = "indiv" ]; 
