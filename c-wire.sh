@@ -1,14 +1,9 @@
 #!/bin/bash
 
-# Fonction pour démarrer le chronomètre
-debut_chrono() {
-    temps_1=$(date +%s.%N)
-}
-
 # Fonction pour arrête le chronomètre et afficher la durée
 fin_chrono() {
     temps_2=$(date +%s.%N)
-    temps=$(echo "$temps_2 - $temps_1" | bc)
+    temps=$(echo "$temps_2 - $1" | bc)
     echo "Durée utile du traitement : ${temps} sec"
 }
 
@@ -153,14 +148,14 @@ else
 	fi
 fi
 	
-debut_chrono
+temps_1=$(date +%s.%N)
 nom_fichier="${2}_${3}.csv"
 touch "$nom_fichier"
 if [ $? -ne 0 ];
 		then 
 		echo "Erreur: impossibilité de créer le fichier demandé"
-		fin_chrono
-		exit 1
+		fin_chrono $temps_1
+  		exit 1
 fi
 
 
