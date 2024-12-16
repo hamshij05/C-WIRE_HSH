@@ -156,9 +156,6 @@ void miseAjour_hauteur(Arbre *a) {
     }
 }
 
-//La fonction pour le parcourt l'AVL en ordre croissant
-
-
 //Fonction pour modifier l'élément d'un nœud
 void modifierElement(Arbre a, int r) {
     if (a == NULL) {
@@ -309,4 +306,7 @@ int verifierEquilibre(Arbre *a) {
     return verifierEquilibre(a->fg) && verifierEquilibre(a->fd);
 }
 
+//Fonction pour calculer la somme 
+
+//Fonction pour vérifier la surproduction
 
