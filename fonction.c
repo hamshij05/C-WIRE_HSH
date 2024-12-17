@@ -1,10 +1,10 @@
 #include "biblio.h"
 
-
+//Il faut finir suppressionAVL, suppressionMin, Existe fils droite et gauche
 
 //Structure d'Arbre AVL
 typedef struct Arbre{
-   Element elmt;
+   int elmt;
    struct arbre *fg;
    struct arbre *fd;
    int equilibre; //facteur d'équilibre
@@ -13,7 +13,7 @@ typedef struct Arbre{
 
 //Structure pour représenter les données électriques
 typedef struct electricite{
-   int identifiant[50]; // "char" si c pas des chiffres
+   char identifiant[50];
    long capacite; //capacité de la station
    long consommation;  //consommation totale
 }Electricite;
@@ -32,19 +32,18 @@ Arbre *creationArbre(element a){
 	return nouveau;
 }
 
-//revoir cette fonction aussi
 //Insertion de la fonction equilibre
 Arbre *equilibrageAVL(Arbre*a){
 	if(a->equilibre>=2){
 		if(a->fd->equilibre>=0){
 			return rotationGauche(a);
 		}
-			else{
-				return doubleRotationGauche(a);
-    }
-  }
-	else(a->equilibre<=-2){
-		if(a-fg-equilibre<=0){
+		else{
+			return doubleRotationGauche(a);
+		}
+	}
+	else if(a->equilibre<=-2){
+		if(a->fg->equilibre<=0){
 			return rotationDroite(a);
 		}
 		else{
@@ -84,7 +83,6 @@ Arbre *insertionAVL(Arbre *a, element e, int *h){
     return a;
 }
 
-//revoir cette fonction
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(const char *file) {
     FILE *file=fopen("c-wire_v00.csv", "r");
@@ -105,6 +103,13 @@ Arbre *creationAVLFromCSV(const char *file) {
     return a;
 }
 
+//Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
+int min(int a, int b) {
+    return (a < b) ? a : b;
+}
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
 
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *a){
@@ -120,14 +125,6 @@ Arbre *rotationGauche(Arbre *a){
 	pivot->equilibre = min(eq_a - 2, eq_a + eq_p - 2, eq_p - 1);
 	a = pivot;
 	return a;
-}
-
-//Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
-int min(int a, int b) {
-    return (a < b) ? a : b;
-}
-int max(int a, int b) {
-    return (a > b) ? a : b;
 }
 
 //Rotation droite pour rééquilibrer l'arbre
@@ -176,7 +173,7 @@ void miseAjour_hauteur(Arbre *a) {
 }
 
 //Fonction pour modifier l'élément d'un nœud
-void modifierElement(Arbre a, int r) {
+void modifierElement(Arbre *a, int r) {
     if (a == NULL) {
         printf("Erreur : le nœud est NULL, modification impossible.\n");
         exit(EXIT_FAILURE); //Terminer le programme en cas de nœud NULL
@@ -187,7 +184,7 @@ void modifierElement(Arbre a, int r) {
 //Fonction recherche
 int recherche(Arbre *a, int e){
 	if(a==NULL){
-		return NULL;
+		return 0;
 	}
 	if(a->elmt == e){
 		return a;
@@ -295,7 +292,7 @@ void infixe(Arbre* a) {
 void exportaCSV(Arbre *a, FILE *fichier) {
     if (a != NULL) {
         exportaCSV(a->fg, fichier);
-        fprintf(fichier, "%d\n", a->elmt);
+        fprintf(fichier, "%d;%ld;%ld\n", a->elmt, a->capacite, a->consommation);
         exportaCSV(a->fd, fichier);
     }
 }
