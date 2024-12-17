@@ -1,4 +1,6 @@
-#include biblio.h
+#include "biblio.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 
 
