@@ -54,32 +54,32 @@ Arbre *equilibrageAVL(Arbre*a){
 
 //Insertion de l'arbre AVL
 Arbre *insertionAVL(Arbre *a, int e, int *h){
-    if (a==NULL){
-        *h=1;
-        return creationArbre(e);
-    }
-    else if(e < a->elmt){
-        a->fg=insertionAVL(a->fg,e,h);
-        *h=-*h;
-    }
-    else if(e > a->elmt){
-        a->fd=insertionAVL(a->fd,e,h);    
-    }
-    else{
-        *h=0;
-        return a;
-    }
-    if(*h!=0){
-        a->equilibre+=*h;
-        a=equilibrageAVL(a);
-        if(a->equilibre==0){
-            *h=0;
-        }
-        else{
-            *h=1;
-        }
-    }
-    return a;
+	if (a==NULL){
+		*h=1;
+		return creationArbre(e);
+	}
+	else if(e < a->elmt){
+		a->fg=insertionAVL(a->fg,e,h);
+		*h=-*h;
+	}
+	else if(e > a->elmt){
+		a->fd=insertionAVL(a->fd,e,h);
+	}
+	else{
+		*h=0;
+		return a;
+	}
+	if(*h!=0){
+		a->equilibre+=*h;
+		a=equilibrageAVL(a);
+		if(a->equilibre==0){
+			*h=0;
+		}
+		else{
+			*h=1;
+		}
+	}
+	return a;
 }
 
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
@@ -146,17 +146,17 @@ Arbre *rotationDroite(Arbre *a){
 
 //Double rotation gauche
 Arbre* doubleRotationGauche(Arbre* a){
-    a->fd=rotationDroite(a->fd);
-    return rotationGauche(a);
+	a->fd=rotationDroite(a->fd);
+	return rotationGauche(a);
 }
 
 //Double rotation droite
 Arbre* doubleRotationDroite(Arbre* a){
-    a->fg=rotationGauche(a->fg);
-    return rotationDroite(a);
+	a->fg=rotationGauche(a->fg);
+	return rotationDroite(a);
 }
 
-//La fonction pour vérifier le fils gauche existe
+//La fonction qui vérifie si un nœud a un fils gauche
 int existeFilsGauche(Arbre *a){
 	if(a==NULL){
 		return 0;
@@ -167,7 +167,7 @@ int existeFilsGauche(Arbre *a){
 	return 0;
 }
 
-//La fonction pour vérifier le fils droit existe
+//La fonction qui vérifie si un nœud a un fils droite
 int existeFilsDroit(Arbre *a){
 	if(a==NULL){
 		return 0;
@@ -195,15 +195,15 @@ void miseAjour_hauteur(Arbre *a) {
     }
 }
 
-//Fonction pour modifier l'élément d'un nœud (elle peut etre plus ameliorer)
+//Fonction pour modifier l'élément d'un nœud
 int modifierElement(Arbre *a, int r) {
-    if (a == NULL) {
-        fprintf(stderr, "Erreur : le nœud est NULL, modification impossible.\n");
-        return 0; // Échec
-    }
-    a->elmt = r; // Modifier l'élément
-    return 1; // Succès
-}->elmt = r;  //Modifier l'élément du nœud
+	if (a == NULL) {
+		printf("Erreur : le nœud est NULL, modification impossible.\n");
+		return 0;
+	}
+	a->elmt = r; //modifier l'élément
+	printf("Élément modifié avec succès : %d\n", r); //message de confirmation
+	return 1;
 }
 
 //Fonction recherche
@@ -354,7 +354,6 @@ int verifierEquilibre(Arbre *a) {
     return verifierEquilibre(a->fg) && verifierEquilibre(a->fd);
 }
 
-//Fonction pour calculer la somme 
 // Fonction pour calculer la somme des consommations totales associées 
 long sommeConsommation(Arbre *a, Electricite *data, int taille) {
     if (a == NULL) {
