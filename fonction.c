@@ -81,15 +81,9 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     }
     return a;
 }
- Athlete* ajout_equipe(Athlete *equipe, int nb_athletes, int sexe) {
-        FILE *fichier = fopen("athletes.txt", "a");
-        char k;
-        if (fichier == NULL) {
-            printf("Erreur lors de l'ouverture du fichier athletes.txt\n");
-            exit(1);
-        }
+
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
-Arbre *creationAVLFromCSV(Arbre* a, const char *file) {
+Arbre *creationAVLFromCSV(Arbre* a) {
     FILE *file = fopen("c-wire_csv", "r");
     if (file == NULL) {
         printf("Erreur lors de l'ouverture du fichier %s\n");
@@ -103,11 +97,12 @@ Arbre *creationAVLFromCSV(Arbre* a, const char *file) {
         int e; // Variable pour stocker l'entier lu
         if (sscanf(ligne, "%d", &e) == 1) {
             a = insertionAVL(a, e, &h);
-        } else {
+        } 
+	else {
             fprintf("Ligne mal formatée ignorée : %s", ligne);
         }
     }
-    fclose(f);
+    fclose(file);
     return a;
 }
 
@@ -121,34 +116,32 @@ int max(int a, int b) {
 
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre* rotationGauche(Arbre *a) {
-    Arbre *pivot;
-    int eq_a, eq_p;
-
-    pivot = a->fd;
-    a->fd = pivot->fg;
-    pivot->fg = a;
-    eq_a = a->equilibre;
-    eq_p = pivot->equilibre;
-    a->equilibre = eq_a - max(eq_p, 0) - 1;
-    pivot->equilibre = min(eq_a - 2, eq_a + eq_p - 2, eq_p - 1);
-    a = pivot;
-    return a;
+	Arbre *pivot=a->fd; //le fils droit devient le pivot
+	int eq_a=a->equilibre; 
+	int eq_p=pivot->equilibre;
+	
+	a->fd = pivot->fg; //le sous-arbre gauche du pivot devient le fils droit de "a"
+	pivot->fg = a; //"a" devient le fils gauche du pivot
+	
+	//Mise à jour des facteurs d'équilibre
+	a->equilibre = eq_a - max(eq_p, 0) - 1;
+	pivot->equilibre = min(eq_a - 2, eq_a + eq_p - 2, eq_p - 1);
+	return pivot; //le pivot devient la nouvelle racine
 }
 
 //Rotation droite pour rééquilibrer l'arbre
 Arbre *rotationDroite(Arbre *a){
-	Arbre *pivot;
-	int eq_a, eq_p;
+	Arbre *pivot = a->fg; //le fils gauche devient le pivot
+	int eq_a=a->equilibre;
+	int eq_p=pivot->equilibre;
 	
-	pivot = a->fg;
-	a->fg = pivot->fd;
-	pivot->fd = a;
-	eq_a = a->equilibre;
-	eq_p = pivot->equilibre;
+	a->fg = pivot->fd; //le sous-arbre droit du pivot devient le fils gauche de "a"
+	pivot->fd = a; //"a" devient le fils droit du pivot
+	
+	//Mise à jour des facteurs d'équilibre
 	a->equilibre = eq_a - min(eq_p, 0) + 1;
 	pivot->equilibre = max(eq_a + 2, eq_a + eq_p + 2, eq_p + 1);
-	a = pivot;
-	return a;
+	return pivot; //le pivot devient la nouvelle racine
 }
 
 //Double rotation gauche
