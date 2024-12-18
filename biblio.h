@@ -30,6 +30,7 @@ Arbre *rotationDroite(Arbre *a); //Rotation droite pour réequilibrer l'arbre
 Arbre *doubleRotationGauche(Arbre *a); //Double Rotation Gauche
 Arbre *doubleRotationDroite(Arbre *a); //Double Rotation Droite
 int hauteur(Arbre *a); //Calcul de l'hauteur de l'arbre AVL
+void miseAjour_hauteur(Arbre *a); //La mise à jour la hauteur d'un noeud après les modifications
 
 
 
