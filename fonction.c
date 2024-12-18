@@ -4,8 +4,8 @@
 //Structure d'Arbre AVL
 typedef struct Arbre{
    int elmt;
-   struct Arbre *fg;
-   struct Arbre *fd;
+   struct arbre *fg;
+   struct arbre *fd;
    int equilibre; //facteur d'équilibre
    int hauteur;
 }Arbre;
@@ -84,8 +84,8 @@ Arbre *insertionAVL(Arbre *a, element e, int *h){
 
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(const char *file) {
-    FILE *f = fopen(file, "r");
-    if (f == NULL) {
+    FILE *fichier = fopen(file, "r");
+    if (fich == NULL) {
         fprintf(stderr, "Erreur lors de l'ouverture du fichier %s\n", file);
         exit(EXIT_FAILURE);
     }
