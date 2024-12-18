@@ -81,12 +81,18 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
     }
     return a;
 }
-
+ Athlete* ajout_equipe(Athlete *equipe, int nb_athletes, int sexe) {
+        FILE *fichier = fopen("athletes.txt", "a");
+        char k;
+        if (fichier == NULL) {
+            printf("Erreur lors de l'ouverture du fichier athletes.txt\n");
+            exit(1);
+        }
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
-Arbre *creationAVLFromCSV(const char *file) {
+Arbre *creationAVLFromCSV(Arbre* a, const char *file) {
     FILE *file = fopen("c-wire_csv", "r");
     if (file == NULL) {
-        printf("Erreur lors de l'ouverture du fichier %s\n", file);
+        printf("Erreur lors de l'ouverture du fichier %s\n");
         exit(EXIT_FAILURE);
     }
     Arbre *a = NULL;
