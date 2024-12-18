@@ -93,34 +93,31 @@ plant="$4"
 EXECUTABLE="main"
 
 # Vérification de la présence du Makefile
-if [ ! -f "makefile" ];
-	then
-	echo "Erreur: Le fichier Makefile est introuvable."
-	exit 1
+if [ ! -f "Makefile" ]; then
+    echo "Erreur: Le fichier Makefile est introuvable."
+    exit 1
 fi
 
 # Vérification de la présence de l'exécutable
-if [ ! -f "$EXECUTABLE" ];
-	then
-	echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation"
+if [ ! -f "$EXECUTABLE" ]; then
+    echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation"
     
-	# lancer la compilation avec le Makefile
-	make "$EXECUTABLE"
+    # lancer la compilation avec le Makefile
+    make "$EXECUTABLE"
     
-	# Vérification si make a réussi
-	if [ $? -ne 0 ]; then
-		echo "Erreur: La compilation avec make a échoué."
-        	exit 1
-	fi
+    # Vérification si make a réussi
+    if [ $? -ne 0 ]; then
+        echo "Erreur: La compilation avec make a échoué."
+        exit 1
+    fi
     
-	echo "Compilation réussie. Exécutable $EXECUTABLE généré."
+    echo "Compilation réussie. Exécutable $EXECUTABLE généré."
 fi
 
-# Vérification que l'exécutable a bien été créé
-if [ ! -f "$EXECUTABLE" ];
-	then
-	echo "Erreur: L'exécutable $EXECUTABLE est introuvable même après compilation."
-	exit 1
+# Vérification que l'exécutable a bien été créé après la compilation
+if [ ! -f "$EXECUTABLE" ]; then
+    echo "Erreur: L'exécutable $EXECUTABLE est introuvable même après compilation."
+    exit 1
 fi
 
 # Exécuter l'exécutable avec les arguments donnés
@@ -128,11 +125,11 @@ echo "Exécution de l'exécutable $EXECUTABLE avec les arguments : $@"
 ./"$EXECUTABLE" "$@"
 
 # Vérification de la réussite de l'exécution
-if [ $? -ne 0 ]; 
-	then
-	echo "Erreur : L'exécution du programme a échoué."
-	exit 1
+if [ $? -ne 0 ]; then
+    echo "Erreur : L'exécution du programme a échoué."
+    exit 1
 fi
+
 
 #dossier tmp
 if [  -d "tmp" ];
