@@ -84,15 +84,15 @@ Arbre *insertionAVL(Arbre *a, element e, int *h){
 
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(const char *file) {
-    FILE *fichier = fopen(file, "r");
-    if (fich == NULL) {
-        fprintf(stderr, "Erreur lors de l'ouverture du fichier %s\n", file);
+    FILE *file = fopen("c-wire_csv", "r");
+    if (file == NULL) {
+        printf("Erreur lors de l'ouverture du fichier %s\n", file);
         exit(EXIT_FAILURE);
     }
 
     Arbre *a = NULL;
-    int h = 0; // Hauteur pour les insertions AVL
-    char ligne[1024]; // Buffer pour lire les lignes du fichier
+    int h = 0; //hauteur pour les insertions AVL
+    char ligne[1024]; //buffer pour lire les lignes du fichier
 
     while (fgets(ligne, sizeof(ligne), f)) {
         int e; // Variable pour stocker l'entier lu
@@ -102,7 +102,6 @@ Arbre *creationAVLFromCSV(const char *file) {
             fprintf(stderr, "Ligne mal formatée ignorée : %s", ligne);
         }
     }
-
     fclose(f);
     return a;
 }
@@ -116,19 +115,19 @@ int max(int a, int b) {
 }
 
 //Rotation gauche pour rééquilibrer l'arbre
-Arbre *rotationGauche(Arbre *a){
-	Arbre*pivot;
-	int eq_a, eq_p;
-	
-	pivot = a->fd;
-	a->fd = pivot->fg;
-	pivot->fg = a;
-	eq_a = a->equilibre;
-	eq_p = pivot->equilibre;
-	a->equilibre = eq_a - max(eq_p, 0) - 1;
-	pivot->equilibre = min(eq_a - 2, eq_a + eq_p - 2, eq_p - 1);
-	a = pivot;
-	return a;
+Arbre* rotationGauche(Arbre *a) {
+    Arbre *pivot;
+    int eq_a, eq_p;
+
+    pivot = a->fd;
+    a->fd = pivot->fg;
+    pivot->fg = a;
+    eq_a = a->equilibre;
+    eq_p = pivot->equilibre;
+    a->equilibre = eq_a - max(eq_p, 0) - 1;
+    pivot->equilibre = min(eq_a - 2, eq_a + eq_p - 2, eq_p - 1);
+    a = pivot;
+    return a;
 }
 
 //Rotation droite pour rééquilibrer l'arbre
