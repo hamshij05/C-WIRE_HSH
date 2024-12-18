@@ -2,7 +2,7 @@
 
 
 //Structure d'Arbre AVL
-typedef struct Arbre{
+typedef struct arbre{
    int elmt;
    struct arbre *fg;
    struct arbre *fd;
@@ -53,7 +53,7 @@ Arbre *equilibrageAVL(Arbre*a){
 }
 
 //Insertion de l'arbre AVL
-Arbre *insertionAVL(Arbre *a, element e, int *h){
+Arbre *insertionAVL(Arbre *a, int e, int *h){
     if (a==NULL){
         *h=1;
         return creationArbre(e);
@@ -89,17 +89,16 @@ Arbre *creationAVLFromCSV(const char *file) {
         printf("Erreur lors de l'ouverture du fichier %s\n", file);
         exit(EXIT_FAILURE);
     }
-
     Arbre *a = NULL;
     int h = 0; //hauteur pour les insertions AVL
     char ligne[1024]; //buffer pour lire les lignes du fichier
 
-    while (fgets(ligne, sizeof(ligne), f)) {
+    while (fgets(ligne, sizeof(ligne), file)) {
         int e; // Variable pour stocker l'entier lu
         if (sscanf(ligne, "%d", &e) == 1) {
             a = insertionAVL(a, e, &h);
         } else {
-            fprintf(stderr, "Ligne mal formatée ignorée : %s", ligne);
+            fprintf("Ligne mal formatée ignorée : %s", ligne);
         }
     }
     fclose(f);
