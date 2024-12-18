@@ -5,8 +5,8 @@
 //Structure d'Arbre AVL
 typedef struct Arbre{
    int elmt;
-   struct arbre *fg;
-   struct arbre *fd;
+   struct Arbre *fg;
+   struct Arbre *fd;
    int equilibre; //facteur d'équilibre
    int hauteur;
 }Arbre;
