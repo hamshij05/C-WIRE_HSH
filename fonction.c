@@ -19,7 +19,7 @@ typedef struct electricite{
   
 //Création de noeud pour l'arbre AVL
 Arbre *creationArbre(int a){
-	Arbre*nouveau=(arbre*)malloc(sizeof(Arbre));
+	Arbre*nouveau=malloc(sizeof(Arbre));
 	if(nouveau==NULL){
 		exit(1);
 	}
