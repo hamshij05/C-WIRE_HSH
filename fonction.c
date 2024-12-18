@@ -1,6 +1,5 @@
 #include "biblio.h"
 
-//Il faut finir suppressionAVL, suppressionMin, Existe fils droite et gauche
 
 //Structure d'Arbre AVL
 typedef struct Arbre{
@@ -19,7 +18,7 @@ typedef struct electricite{
 }Electricite;
   
 //Création de noeud pour l'arbre AVL
-Arbre *creationArbre(element a){
+Arbre *creationArbre(int a){
 	Arbre*nouveau=(arbre*)malloc(sizeof(Arbre));
 	if(nouveau==NULL){
 		exit(1);
@@ -85,21 +84,26 @@ Arbre *insertionAVL(Arbre *a, element e, int *h){
 
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(const char *file) {
-    FILE *file=fopen("c-wire_v00.csv", "r");
-    if (file==NULL) {
-        printf("Erreur lors de l'ouverture du fichier");
+    FILE *f = fopen(file, "r");
+    if (f == NULL) {
+        fprintf(stderr, "Erreur lors de l'ouverture du fichier %s\n", file);
         exit(EXIT_FAILURE);
     }
+
     Arbre *a = NULL;
-    int h = 0;
-    char ligne[1024];
-    while (fgets(ligne, sizeof(ligne), file)) {
-        int e;
+    int h = 0; // Hauteur pour les insertions AVL
+    char ligne[1024]; // Buffer pour lire les lignes du fichier
+
+    while (fgets(ligne, sizeof(ligne), f)) {
+        int e; // Variable pour stocker l'entier lu
         if (sscanf(ligne, "%d", &e) == 1) {
             a = insertionAVL(a, e, &h);
+        } else {
+            fprintf(stderr, "Ligne mal formatée ignorée : %s", ligne);
         }
     }
-    fclose(file);
+
+    fclose(f);
     return a;
 }
 
@@ -154,7 +158,7 @@ Arbre* doubleRotationDroite(Arbre* a){
     a->fg=rotationGauche(a->fg);
     return rotationDroite(a);
 }
-//je suis arrivee a la
+
 //Fonction pour calculer la hauteur de l'arbre AVL
 int hauteur(Arbre* a){
   if(a==NULL){
@@ -172,19 +176,21 @@ void miseAjour_hauteur(Arbre *a) {
     }
 }
 
-//Fonction pour modifier l'élément d'un nœud
-void modifierElement(Arbre *a, int r) {
+//Fonction pour modifier l'élément d'un nœud (elle peut etre plus ameliorer)
+int modifierElement(Arbre *a, int r) {
     if (a == NULL) {
-        printf("Erreur : le nœud est NULL, modification impossible.\n");
-        exit(EXIT_FAILURE); //Terminer le programme en cas de nœud NULL
+        fprintf(stderr, "Erreur : le nœud est NULL, modification impossible.\n");
+        return 0; // Échec
     }
-    a->elmt = r;  //Modifier l'élément du nœud
+    a->elmt = r; // Modifier l'élément
+    return 1; // Succès
+}->elmt = r;  //Modifier l'élément du nœud
 }
 
 //Fonction recherche
 int recherche(Arbre *a, int e){
 	if(a==NULL){
-		return 0;
+		return NULL;
 	}
 	if(a->elmt == e){
 		return a;
@@ -197,16 +203,23 @@ int recherche(Arbre *a, int e){
 	}
 }
 
-//Fonction pour afficher les données
-void afficherDonnees(Arbre *a, int e){
+//Fonction pour afficher les données (elle verifie tout)
+void afficherDonnees(Arbre *a, int e) {
+    if (a == NULL) {
+        printf("L'arbre est vide.\n");
+        return;
+    }
+
     Arbre *noeud = recherche(a, e);
-    if (noeud != NULL){
-        printf("Élément trouvé : %d, Équilibre : %d, Hauteur : %d\n", noeud->elmt, noeud->equilibre, hauteur(noeud));
-    } 
-    else{
+    if (noeud != NULL) {
+        printf("Élément trouvé : %d, Équilibre : %d, Hauteur : %d\n",
+               noeud->elmt, noeud->equilibre, hauteur(noeud));
+    } else {
         printf("Élément non trouvé dans l'arbre.\n");
     }
 }
+
+//Il faut finir suppressionAVL, suppressionMin, Existe fils droite et gauche
 
 //Fonction suppression
 Arbre *suppressionAVL(Arbre *a, int e, int *h) {
