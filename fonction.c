@@ -156,6 +156,28 @@ Arbre* doubleRotationDroite(Arbre* a){
     return rotationDroite(a);
 }
 
+//La fonction pour vérifier le fils gauche existe
+int existeFilsGauche(Arbre *a){
+	if(a==NULL){
+		return 0;
+	}
+	if(a->fg != NULL){
+		return 1;
+	}
+	return 0;
+}
+
+//La fonction pour vérifier le fils droit existe
+int existeFilsDroit(Arbre *a){
+	if(a==NULL){
+		return 0;
+	}
+	if(a->fd != NULL){
+		return 1;
+	}
+	return 0;
+}
+
 //Fonction pour calculer la hauteur de l'arbre AVL
 int hauteur(Arbre* a){
   if(a==NULL){
@@ -163,10 +185,10 @@ int hauteur(Arbre* a){
   }
   int hauteur_gauche=hauteur(a->fg);
   int hauteur_droite=hauteur(a->fd);
-  return (hauteur_gauche>hauteur_droite?hauteur_gauche:hauteur_droite)+1;
+  return (hauteur_gauche > hauteur_droite ? hauteur_gauche : hauteur_droite)+1;
 }
 
-//La fonction pour mise à jour la hauteur d'un noeud après modification
+//La fonction pour mise à jour la hauteur d'un noeud après les modifications
 void miseAjour_hauteur(Arbre *a) {
     if (a!= NULL) {
         a->hauteur = 1 + (hauteur(a->fg) > hauteur(a->fd) ? hauteur(a->fg) : hauteur(a->fd));
