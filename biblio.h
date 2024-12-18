@@ -15,9 +15,9 @@ typedef struct arbre{
 
 //Structure pour représenter les données électriques
 typedef struct electricite{
-  int identifiant;
-  int capacite; //capacité de la station
-  int consommation;  //consommation totale
+  char identifiant;
+  long capacite; //capacité de la station
+  long consommation;  //consommation totale
 }Electricite;
 
 
