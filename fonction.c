@@ -15,6 +15,7 @@ typedef struct arbre{
 Arbre *creationArbre(char identifiant, long capacite, long consommation){
 	Arbre*nouveau=malloc(sizeof(Arbre));
 	if(nouveau==NULL){
+		printf("Erreur d'allocation de mémoire\n");
 		exit(1);
 	}
 	nouveau->identifiant=identifiant;
