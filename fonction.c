@@ -168,7 +168,7 @@ int existeFilsGauche(Arbre *a){
 }
 
 //La fonction qui vérifie si un nœud a un fils droite
-int existeFilsDroit(Arbre *a){
+int existeFilsDroite(Arbre *a){
 	if(a==NULL){
 		return 0;
 	}
@@ -238,77 +238,46 @@ void afficherDonnees(Arbre *a, int e) {
     }
 }
 
-//Il faut finir suppressionAVL, suppressionMin, Existe fils droite et gauche
+//Il faut finir suppressionMin
 
 //Fonction suppression
-Arbre *suppressionAVL(Arbre *a, int e, int *h) {
-    if (a==NULL){
-        *h = 0;
-        return a;
-    }
-    else if (e > a->elmt){
-        a->fd = suppressionAVL(a->fd, e);
-    }
-    else if(e < a->elmt){
-        a->fg = suppressionAVL(a->fg, e);
-        *h = -*h;
-    }
-    else if(existeFilsDroite->a){
-        a->fd=suppMinAVL(a->fd, h, &(a->elmt))
-    }
-    else{
-        tmp=a;
-        a=a->fg;
-        free(tmp);
-        *h=-1;
-        return(a);
-    }
-    if(a==NULL){
-        return a;
-    }
-    if(*h!=0){
-        a->equilibre=a->equilibre+*h;
-        if(a->equilibre==0){
-            *h=-1;
-        }
-        else{
-            *h=0;
-        }
-    }
-    return a;
-}
-
-    else{
-        if (a->fg == NULL) {
-            Arbre *temp = a->fd;
-            free(a);
-            *h = -1;
-            return temp;
-        } else if (a->fd == NULL) {
-            Arbre *temp = a->fg;
-            free(a);
-            *h = -1;
-            return temp;
-        } else { // Deux enfants
-            Arbre *temp = a->fd;
-            while (temp->fg != NULL) {
-                temp = temp->fg;
-            }
-            a->elmt = temp->elmt;
-            a->fd = supprimerAVL(a->fd, temp->elmt, h);
-        }
-    }
-
-    if (*h != 0) {
-        a->equilibre += *h;
-        a = equilibrageAVL(a);
-        if (a->equilibre == 0) {
-            *h = -1;
-        } else {
-            *h = 1;
-        }
-    }
-    return a;
+Arbre *suppressionAVL(Arbre *a, int e, int *h){
+	Arbre *tmp;
+	if (a==NULL){
+		*h = 0;
+		return a;
+	}
+	else if (e > a->elmt){ //recherche dans le sous-arbre droit
+		a->fd = suppressionAVL(a->fd, e);
+	}
+	else if(e < a->elmt){ //recherche dans le sous-arbre gauche
+		a->fg = suppressionAVL(a->fg, e);
+		*h = -*h;
+	}
+	else if(a->fd!=NULL){ //si le noeud a un fils droit
+		a->fd=suppMinAVL(a->fd, h, &(a->elmt));
+	}
+	else{
+		tmp=a;
+		a=a->fg;
+		free(tmp);
+		*h=-1;
+		return(a);
+	}
+	if(a==NULL){
+		return a;
+	}
+	//Mise à jour et rééquilibrage après suppression
+	if(*h!=0){
+		a->equilibre+=*h;
+		if(a->equilibre==0){
+			*h=-1;
+		}
+		else{
+			*h=0;
+		}
+	}
+	return a;
 }
 
 //Parcours infixe
