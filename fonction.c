@@ -238,8 +238,6 @@ void afficherDonnees(Arbre *a, int e) {
     }
 }
 
-//Il faut finir suppressionMin
-
 //Fonction suppression
 Arbre *suppressionAVL(Arbre *a, int e, int *h){
 	Arbre *tmp;
@@ -280,13 +278,40 @@ Arbre *suppressionAVL(Arbre *a, int e, int *h){
 	return a;
 }
 
-//Parcours infixe
-void infixe(Arbre* a) { 
-    if (a != NULL) {
-        infixe(a->fg);
-        printf("Élément : %d, Équilibre : %d\n", a->elmt, a->equilibre);
-        infixe(a->fd);
+//Fonction pour supprimer le plus petit élément dans un arbre AVL
+Arbre *suppMinAVL(Arbre *a, int *h, int *pe){
+    Arbre *tmp;
+    if (a->fg == NULL){ //trouve le plus petit élément
+        *pe=a->elmt; //sauvegarde la valeur
+        *h=-1; //réduction de la hauteur
+        tmp=a;
+        a=a->fd; //le sous-arbre droit devient la racine
+        free(tmp);
+        return a;
     }
+    else{
+        a->fg=suppMinAVL(a->fg, h, pe); //appel recursif à gauche
+        *h=-*h;
+    }
+    if(*h != 0){
+		a->equilibre+=*h; //mise à jour du facteur d'équilibrage
+		if(a->equilibre == 0){
+		    *h=-1;
+		}
+		else{
+		    *h=0;
+		}
+    }
+    return a;
+}
+
+//Parcours infixe
+void infixe(Arbre* a){ 
+	if (a != NULL){
+		infixe(a->fg);
+		printf("Élément : %d, Équilibre : %d\n", a->elmt, a->equilibre);
+		infixe(a->fd);
+	}
 }
 
 //Fonction pour exporter les données dans un fichier
