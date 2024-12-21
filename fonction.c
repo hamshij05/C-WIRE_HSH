@@ -69,9 +69,10 @@ Arbre *insertionAVL(Arbre *a, long identifiant, long capacite, long consommation
 
 
 //Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
-int max(int x, int y) {
+long max(long x, long y) {
 	return (x > y) ? x : y;
 }
+
 
 //Fonction pour calculer la hauteur de l'arbre AVL
 int hauteur(Arbre* a){
