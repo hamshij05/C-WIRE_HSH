@@ -5,20 +5,16 @@
 #include <math.h>
 
 //Structure d'Arbre AVL
+//Structure d'Arbre AVL
 typedef struct arbre{
-  int elmt;
-  struct arbre *fg;
-  struct arbre *fd;
-  int equilibre; //facteur d'équilibre
-  int hauteur;
+	char identifiant[50]; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
+	long capacite; //capacité de la station
+	long consommation; //consommation totale
+	struct arbre *fg;
+	struct arbre *fd;
+	int equilibre; //facteur d'équilibre
+	int hauteur;
 }Arbre;
-
-//Structure pour représenter les données électriques
-typedef struct electricite{
-  char identifiant;
-  long capacite; //capacité de la station
-  long consommation;  //consommation totale
-}Electricite;
 
 
 Arbre *creationarbre(int a); //Création de noeud pour l'arbre AVL
