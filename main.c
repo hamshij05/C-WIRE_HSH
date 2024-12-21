@@ -1,40 +1,24 @@
-//Cette fichier main.c lit le fichier CSV, extrait les données et les insère dans un arbre AVL
-
+#include <biblio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Structure pour les données électriques
-typedef struct electricite {
-    int identifiant; //identifiant de la centrale éléctrique
-    int hvb_station;
-    int hva_station;
-    int lv_station;
-    long capacite;
-}Electricite;
-
-//Fonction pour la lecture CSV et Insertion dans l’Arbre
-Arbre *creationAVLFromCSV(const char *file) {
-    FILE *file=fopen("c-wire_v00.csv", "r");
-    if (file==NULL) {
-        printf("Erreur lors de l'ouverture du fichier");
-        exit(EXIT_FAILURE);
+//Fonction de parsing et construction de l'arbre AVL
+Arbre *parser_file(const char *str){
+    char *restant;
+    //Vérifier si la chaîne est NULL ou si elle contient "-"
+    if(str == NULL || strcmp(str, "-") == 0){
+        return 0; 
     }
-    Arbre *a = NULL;
-    int h = 0;
-    char ligne[1024];
-    while (fgets(ligne, sizeof(ligne), file)) {
-        int e;
-        if (sscanf(ligne, "%d", &e) == 1) {
-            a = insertionAVL(a, e, &h);
-        }
+    //Convertir la chaîne en entier en base 10
+    long nombre = strtol(str, &restant, 10);
+    //Si la conversion ne consomme pas toute la chaine
+    if(*restant != '\0'){
+        printf("Attention : \"%s\" contient des caractères non numériques\n", str);
     }
-    fclose(file);
-    return a;
+    return nombre; //retourner la valeur convertie
 }
-
-int parseCSV(const char *filename, AVLNode **root) {
-   
+       
 int main(){
   FILE*fichier=fopen("c-wire.csv","r");
   
@@ -46,8 +30,10 @@ int main(){
     return 0;
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char* argv[]){
+    if(argc < 3){
+        fprintf(stderr, 
+
     int RouteID;
     float distance;
     char header[256];
