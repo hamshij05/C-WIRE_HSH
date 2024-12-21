@@ -2,7 +2,7 @@
 
 //Structure d'Arbre AVL
 typedef struct arbre{
-	char identifiant; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
+	long identifiant; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
 	long capacite; //capacité de la station
 	long consommation; //consommation totale
 	struct arbre *fg;
@@ -12,7 +12,7 @@ typedef struct arbre{
 }Arbre;
 
 //Création de nouveau noeud pour l'arbre AVL
-Arbre *creationArbre(char identifiant, long capacite, long consommation){
+Arbre *creationArbre(long identifiant, long capacite, long consommation){
 	Arbre*nouveau=malloc(sizeof(Arbre));
 	if(nouveau==NULL){
 		printf("Erreur d'allocation de mémoire\n");
@@ -29,34 +29,44 @@ Arbre *creationArbre(char identifiant, long capacite, long consommation){
 }
 
 //Insertion de l'arbre AVL
-Arbre *insertionAVL(Arbre *a, int e, int *h){
+Arbre *insertionAVL(Arbre *a, long identifiant, long capacite, long consommation){
 	if (a==NULL){
-		*h=1;
-		return creationArbre(e);
+		return creationArbre(identifiant, capacite, consommation);
 	}
-	else if(e < a->elmt){
-		a->fg=insertionAVL(a->fg,e,h);
-		*h=-*h;
+	if(identifiant < a->identifiant){
+		a->fg=insertionAVL(a->fg,identifiant,capacite,consommation);
 	}
-	else if(e > a->elmt){
-		a->fd=insertionAVL(a->fd,e,h);
+	else if(identifiant > a->identifiant){
+		a->fd=insertionAVL(a->fd,identifiant,capacite,consommation);
 	}
-	else{
-		*h=0;
+	else{ //Mise à jour de la consommation et la capacité
+		a->consommation+=consommation;
+		a->capacite=max(a->capacite,capacite);
 		return a;
 	}
-	if(*h!=0){
-		a->equilibre+=*h;
-		a=equilibrageAVL(a);
-		if(a->equilibre==0){
-			*h=0;
-		}
-		else{
-			*h=1;
-		}
+	//Mise à jour de la hauteur de l'arbre
+	a->hauteur = 1 + max(hauteur(a->fg),hauteur(a->fd));
+	//Mise à jour de l'équilibre de l'arbre
+	long equilibre=facteur_equilibre(a);
+	//Cas d'équilibre
+	if(equilibre > 1 && identifiant < a->fg->identifiant){
+		return rotationDroite(a);
 	}
+	if(equilibre < -1 && identifiant > a->fd->identifiant){
+		return rotationGauche(a);
+	}
+	if(equilibre > 1 && identifiant > a->fg->identifiant){
+		a->fg=rotationGauche(a->fg);
+		return rotationDroite(a);
+	}
+	if(equilibre<-1 && identifiant<a->fd->identifiant){
+		a->fd=rotationDroite(a->fd);
+		return rotationGauche(a);
+	}
+	printf("Erreur : échec de l'insertion pour l'identifiant : %ld, capacité : %ld, Consommation : %ld\n", identifiant, capacite, consommation);
 	return a;
 }
+
 
 //Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
 int max(int x, int y) {
