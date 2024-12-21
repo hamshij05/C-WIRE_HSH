@@ -89,7 +89,6 @@ Arbre *creationAVLFromCSV(Arbre* a) {
         printf("Erreur lors de l'ouverture du fichier %s\n");
         exit(EXIT_FAILURE);
     }
-    Arbre *a = NULL;
     int h = 0; //hauteur pour les insertions AVL
     char ligne[1024]; //buffer pour lire les lignes du fichier
 
@@ -120,12 +119,12 @@ Arbre* rotationGauche(Arbre *a) {
 	int eq_a=a->equilibre; 
 	int eq_p=pivot->equilibre;
 	
-	a->fd = pivot->fg; //le sous-arbre gauche du pivot devient le fils droit de "a"
-	pivot->fg = a; //"a" devient le fils gauche du pivot
+	a->fd=pivot->fg; //le sous-arbre gauche du pivot devient le fils droit de "a"
+	pivot->fg=a; //"a" devient le fils gauche du pivot
 	
 	//Mise à jour des facteurs d'équilibre
-	a->equilibre = eq_a - max(eq_p, 0) - 1;
-	pivot->equilibre = min(eq_a - 2, eq_a + eq_p - 2, eq_p - 1);
+	a->equilibre = eq_a-max(eq_p, 0)-1;
+	pivot->equilibre = min(eq_a-2, eq_a+eq_p-2, eq_p-1);
 	return pivot; //le pivot devient la nouvelle racine
 }
 
@@ -352,9 +351,7 @@ long sommeConsommation(Arbre *a, Electricite *data, int taille) {
     if (a == NULL) {
         return 0;
     }
-
     long somme = 0;
-
     // Trouver l'identifiant correspondant dans le tableau de structures Electricite
     for (int i = 0; i < taille; i++) {
         if (data[i].identifiant[0] == a->elmt) { // On suppose que identifiant[0] est utilisé comme clé unique
