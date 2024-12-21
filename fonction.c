@@ -28,27 +28,6 @@ Arbre *creationArbre(char identifiant, long capacite, long consommation){
 	return nouveau;
 }
 
-//Insertion de la fonction equilibre
-Arbre *equilibrageAVL(Arbre*a){
-	if(a->equilibre>=2){
-		if(a->fd->equilibre>=0){
-			return rotationGauche(a);
-		}
-		else{
-			return doubleRotationGauche(a);
-		}
-	}
-	else if(a->equilibre<=-2){
-		if(a->fg->equilibre<=0){
-			return rotationDroite(a);
-		}
-		else{
-			return doubleRotationDroite(a);
-		}
-	}
-	return a;
-}
-
 //Insertion de l'arbre AVL
 Arbre *insertionAVL(Arbre *a, int e, int *h){
 	if (a==NULL){
@@ -79,6 +58,87 @@ Arbre *insertionAVL(Arbre *a, int e, int *h){
 	return a;
 }
 
+//Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
+int max(int x, int y) {
+	return (x > y) ? x : y;
+}
+
+//Fonction pour calculer la hauteur de l'arbre AVL
+int hauteur(Arbre* a){
+	if(a==NULL){
+		return 0;
+	}
+	int hauteur_gauche=hauteur(a->fg);
+	int hauteur_droite=hauteur(a->fd);
+	return (hauteur_gauche > hauteur_droite ? hauteur_gauche : hauteur_droite)+1;
+}
+
+//La fonction pour mise à jour la hauteur d'un noeud après les modifications
+void miseAjour_hauteur(Arbre *a) {
+    if (a!= NULL) {
+        a->hauteur = 1 + (hauteur(a->fg) > hauteur(a->fd) ? hauteur(a->fg) : hauteur(a->fd));
+    }
+}
+
+//Rotation gauche pour rééquilibrer l'arbre
+Arbre *rotationGauche(Arbre *pivot){
+	Arbre *a = pivot->fd; //a devient le fils droit de pivot
+	Arbre *tmp = a->fg; 
+	
+	a->fg = pivot;
+	pivot->fd = tmp;
+
+	//Mise à jour des hauteurs des noeuds
+	pivot->hauteur = max(hauteur(pivot->fg),hauteur(pivot->fd))+1;
+	a->hauteur = max(hauteur(a->fg),hauteur(pivot->fd))+1;   
+	return a; //a devient la nouvelle racine
+}
+
+//Rotation droite pour rééquilibrer l'arbre
+Arbre *rotationDroite(Arbre *a){
+	Arbre* pivot = a->fg; //le fils gauche devient le pivot
+	Arbre* tmp = pivot->fd; //le fils droit de pivot
+	
+	pivot->fd = a; //a devient le fils droit de pivot
+	a->fg = tmp; 
+	
+	//Mise à jour des hauteurs des noeuds
+	a->hauteur = max(hauteur(a->fg),(hauteur(a->fd))+ 1;
+	pivot->hauteur = max(hauteur(pivot->fg),hauteur(pivot->fd))+ 1);
+	return pivot; //le pivot devient la nouvelle racine
+}
+
+//Double rotation gauche
+Arbre* doubleRotationGauche(Arbre* a){
+	a->fd=rotationDroite(a->fd);
+	return rotationGauche(a);
+}
+
+//Double rotation droite
+Arbre* doubleRotationDroite(Arbre* a){
+	a->fg=rotationGauche(a->fg);
+	return rotationDroite(a);
+}
+//Insertion de la fonction equilibre
+Arbre *equilibrageAVL(Arbre*a){
+	if(a->equilibre>=2){
+		if(a->fd->equilibre>=0){
+			return rotationGauche(a);
+		}
+		else{
+			return doubleRotationGauche(a);
+		}
+	}
+	else if(a->equilibre<=-2){
+		if(a->fg->equilibre<=0){
+			return rotationDroite(a);
+		}
+		else{
+			return doubleRotationDroite(a);
+		}
+	}
+	return a;
+}
 //Fonction pour la lecture CSV et Insertion dans l’Arbre
 Arbre *creationAVLFromCSV(Arbre* a) {
     FILE *file = fopen("c-wire_csv", "r");
@@ -102,55 +162,7 @@ Arbre *creationAVLFromCSV(Arbre* a) {
     return a;
 }
 
-//Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
-int min(int a, int b) {
-	return (a < b) ? a : b;
-}
-int max(int a, int b) {
-	return (a > b) ? a : b;
-}
 
-//Rotation gauche pour rééquilibrer l'arbre
-Arbre* rotationGauche(Arbre *a) {
-	Arbre *pivot=a->fd; //le fils droit devient le pivot
-	int eq_a=a->equilibre; 
-	int eq_p=pivot->equilibre;
-	
-	a->fd=pivot->fg; //le sous-arbre gauche du pivot devient le fils droit de "a"
-	pivot->fg=a; //"a" devient le fils gauche du pivot
-	
-	//Mise à jour des facteurs d'équilibre
-	a->equilibre = eq_a-max(eq_p, 0)-1;
-	pivot->equilibre = min(eq_a-2, eq_a+eq_p-2, eq_p-1);
-	return pivot; //le pivot devient la nouvelle racine
-}
-
-//Rotation droite pour rééquilibrer l'arbre
-Arbre *rotationDroite(Arbre *a){
-	Arbre *pivot = a->fg; //le fils gauche devient le pivot
-	int eq_a=a->equilibre;
-	int eq_p=pivot->equilibre;
-	
-	a->fg = pivot->fd; //le sous-arbre droit du pivot devient le fils gauche de "a"
-	pivot->fd = a; //"a" devient le fils droit du pivot
-	
-	//Mise à jour des facteurs d'équilibre
-	a->equilibre = eq_a - min(eq_p, 0) + 1;
-	pivot->equilibre = max(eq_a + 2, eq_a + eq_p + 2, eq_p + 1);
-	return pivot; //le pivot devient la nouvelle racine
-}
-
-//Double rotation gauche
-Arbre* doubleRotationGauche(Arbre* a){
-	a->fd=rotationDroite(a->fd);
-	return rotationGauche(a);
-}
-
-//Double rotation droite
-Arbre* doubleRotationDroite(Arbre* a){
-	a->fg=rotationGauche(a->fg);
-	return rotationDroite(a);
-}
 
 //La fonction qui vérifie si un nœud a un fils gauche
 int existeFilsGauche(Arbre *a){
@@ -172,23 +184,6 @@ int existeFilsDroite(Arbre *a){
 		return 1;
 	}
 	return 0;
-}
-
-//Fonction pour calculer la hauteur de l'arbre AVL
-int hauteur(Arbre* a){
-	if(a==NULL){
-		return 0;
-	}
-	int hauteur_gauche=hauteur(a->fg);
-	int hauteur_droite=hauteur(a->fd);
-	return (hauteur_gauche > hauteur_droite ? hauteur_gauche : hauteur_droite)+1;
-}
-
-//La fonction pour mise à jour la hauteur d'un noeud après les modifications
-void miseAjour_hauteur(Arbre *a) {
-    if (a!= NULL) {
-        a->hauteur = 1 + (hauteur(a->fg) > hauteur(a->fd) ? hauteur(a->fg) : hauteur(a->fd));
-    }
 }
 
 //Fonction pour modifier l'élément d'un nœud
