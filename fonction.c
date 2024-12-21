@@ -129,9 +129,7 @@ long facteur_equilibre(Arbre* r){
 
 //Parcours en ordre croissant (infixe = parcours en ordre) et écriture dans le fichier de sortie
 void infixe(Arbre* a, FILE* fichier_resultat){ 
-	if (a==NULL){ 
-		return 0; //Si a est NULL, la fonction retourne
-	}
+	if (!a) return; //Si a est NULL, la fonction retourne
 	infixe(a->fg,fichier_resultat);
 	fprintf(fichier_resultat, "%ld : %ld : %ld\n", a->identifiant, a->capacite, a->consommation);
 	infixe(a->fd,fichier_resultat);
@@ -140,7 +138,7 @@ void infixe(Arbre* a, FILE* fichier_resultat){
 
 //Libère la mémoire de l'arbre AVL
 void freeAVL(Arbre* a){
-	if (a != NULL){
+	if (!a) return; //Si a est NULL, la fonction retourne
 		freeAVL(a->fg);
 		freeAVL(a->fd);
 		free(a);
