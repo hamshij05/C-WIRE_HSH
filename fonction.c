@@ -108,10 +108,10 @@ Arbre *creationAVLFromCSV(Arbre* a) {
 
 //Prototypes des fonctions pour rotation de Gauche et rotation de Droite 
 int min(int a, int b) {
-    return (a < b) ? a : b;
+	return (a < b) ? a : b;
 }
 int max(int a, int b) {
-    return (a > b) ? a : b;
+	return (a > b) ? a : b;
 }
 
 //Rotation gauche pour rééquilibrer l'arbre
@@ -180,12 +180,12 @@ int existeFilsDroite(Arbre *a){
 
 //Fonction pour calculer la hauteur de l'arbre AVL
 int hauteur(Arbre* a){
-  if(a==NULL){
-    return 0;
-  }
-  int hauteur_gauche=hauteur(a->fg);
-  int hauteur_droite=hauteur(a->fd);
-  return (hauteur_gauche > hauteur_droite ? hauteur_gauche : hauteur_droite)+1;
+	if(a==NULL){
+		return 0;
+	}
+	int hauteur_gauche=hauteur(a->fg);
+	int hauteur_droite=hauteur(a->fd);
+	return (hauteur_gauche > hauteur_droite ? hauteur_gauche : hauteur_droite)+1;
 }
 
 //La fonction pour mise à jour la hauteur d'un noeud après les modifications
@@ -222,20 +222,19 @@ int recherche(Arbre *a, int e){
 	}
 }
 
-//Fonction pour afficher les données (elle verifie tout)
+//Fonction pour afficher les données
 void afficherDonnees(Arbre *a, int e) {
-    if (a == NULL) {
-        printf("L'arbre est vide.\n");
-        return;
-    }
-
-    Arbre *noeud = recherche(a, e);
-    if (noeud != NULL) {
-        printf("Élément trouvé : %d, Équilibre : %d, Hauteur : %d\n",
-               noeud->elmt, noeud->equilibre, hauteur(noeud));
-    } else {
-        printf("Élément non trouvé dans l'arbre.\n");
-    }
+	if (a == NULL) {
+		printf("L'arbre est vide.\n");
+		return;
+	}
+	Arbre *noeud = recherche(a, e);
+	if (noeud != NULL) {
+		printf("Élément trouvé : %d, Équilibre : %d, Hauteur : %d\n",noeud->elmt, noeud->equilibre, hauteur(noeud));
+	} 
+	else {
+		printf("Élément non trouvé dans l'arbre.\n");
+	}
 }
 
 //Fonction suppression
@@ -371,55 +370,6 @@ long sommeConsommation(Arbre *a, Electricite *data, int taille) {
     return somme;
 }
 
-// Fonction pour calculer la somme des consommations totales associées 
-
-long sommeConsommation(Arbre *a, Electricite *data, int taille) {
-    if (a == NULL) {
-        return 0;
-    }
-
-    long somme = 0;
-
-    // Trouver l'identifiant correspondant dans le tableau de structures Electricite
-    for (int i = 0; i < taille; i++) {
-        if (data[i].identifiant[0] == a->elmt) { // On suppose que identifiant[0] est utilisé comme clé unique
-            somme += data[i].consommation;
-            break;
-        }
-    }
-
-    // Parcours infixe pour visiter tous les nœuds
-    somme += sommeConsommation(a->fg, data, taille);
-    somme += sommeConsommation(a->fd, data, taille);
-
-    return somme;
-}
-
-
-
-//Fonction pour vérifier la surproduction
-// Fonction pour calculer la somme des consommations totales associées 
-long sommeConsommation(Arbre *a, Electricite *data, int taille) {
-    if (a == NULL) {
-        return 0;
-    }
-
-    long somme = 0;
-
-    // Trouver l'identifiant correspondant dans le tableau de structures Electricite
-    for (int i = 0; i < taille; i++) {
-        if (data[i].identifiant[0] == a->elmt) { // On suppose que identifiant[0] est utilisé comme clé unique
-            somme += data[i].consommation;
-            break;
-        }
-    }
-
-    // Parcours infixe pour visiter tous les nœuds
-    somme += sommeConsommation(a->fg, data, taille);
-    somme += sommeConsommation(a->fd, data, taille);
-
-    return somme;
-}
 
 // Fonction pour vérifier la surproduction
 typedef struct surproduction {
