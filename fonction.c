@@ -1,24 +1,25 @@
 #include "biblio.h"
 
-
 //Structure d'Arbre AVL
 typedef struct arbre{
-	char identifiant[50]; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
+	char identifiant; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
 	long capacite; //capacité de la station
 	long consommation; //consommation totale
 	struct arbre *fg;
 	struct arbre *fd;
-	int equilibre; //facteur d'équilibre
+	int equilibre; //facteur d'équilibre pour l'arbre AVL
 	int hauteur;
 }Arbre;
 
-//Création de noeud pour l'arbre AVL
-Arbre *creationArbre(int a){
+//Création de nouveau noeud pour l'arbre AVL
+Arbre *creationArbre(char identifiant, long capacite, long consommation){
 	Arbre*nouveau=malloc(sizeof(Arbre));
 	if(nouveau==NULL){
 		exit(1);
 	}
-	nouveau->elmt=a;
+	nouveau->identifiant=identifiant;
+	nouveau->capacite=capacite;
+	nouveau->consommation=consommation;
 	nouveau->fg=NULL;
 	nouveau->fd=NULL;
 	nouveau->equilibre=0;
