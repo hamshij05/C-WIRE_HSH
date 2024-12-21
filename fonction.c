@@ -34,14 +34,14 @@ Arbre *insertionAVL(Arbre *a, long identifiant, long capacite, long consommation
 		return creationArbre(identifiant, capacite, consommation);
 	}
 	if(identifiant < a->identifiant){
-		a->fg=insertionAVL(a->fg,identifiant,capacite,consommation);
+		a->fg = insertionAVL(a->fg,identifiant,capacite,consommation);
 	}
 	else if(identifiant > a->identifiant){
-		a->fd=insertionAVL(a->fd,identifiant,capacite,consommation);
+		a->fd = insertionAVL(a->fd,identifiant,capacite,consommation);
 	}
 	else{ //Mise à jour de la consommation et la capacité
-		a->consommation+=consommation;
-		a->capacite=max(a->capacite,capacite);
+		a->consommation += consommation;
+		a->capacite = max(a->capacite,capacite);
 		return a;
 	}
 	//Mise à jour de la hauteur de l'arbre
