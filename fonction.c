@@ -133,7 +133,7 @@ void infixe(Arbre* a, FILE* fichier_resultat){
 		return 0; //Si a est NULL, la fonction retourne
 	}
 	infixe(a->fg,fichier_resultat);
-	fprintf("fichier_resultat, %ld : %ld : %ld\n", a->identifiant, a->capacite, a->consommation);
+	fprintf(fichier_resultat, "%ld : %ld : %ld\n", a->identifiant, a->capacite, a->consommation);
 	infixe(a->fd,fichier_resultat);
 	}
 }
