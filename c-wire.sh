@@ -2,7 +2,7 @@
 
 # Fonction pour arrête le chronomètre et afficher la durée
 #temps_1=$(date +%s.%N)
-fin_chrono() { #fait à l'aide de Chat GPT
+fin_chrono() {
     # Vérifier si $1 est un nombre valide (entier ou flottant)
     if ! [[ "$1" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
         echo "Erreur : L'argument de temps ($1) n'est pas un nombre valide."
@@ -167,8 +167,9 @@ if [ $? -ne 0 ];
   		exit 1
 fi
 head -n 1 ../$fichier | cut -d';' -f2,7,8 > $name_file1 
-grep -E "[1-9];[1-9]+;-;-;-;-;[1-9]+;-" ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' >> $name_file1 
-grep -E "[1-9];[1-9]+;-;-;[1-9]+;-;-;[1-9]+" ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' >> $name_file1 
+grep -E "[1-9];[0-9]+;-;-;-;-;[0-9]+;-" ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' >> $name_file1 
+grep -E "[1-9];[0-9]+;-;-;[1-9]+;-;-;[1-9]+" ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' >> $name_file1 
+
 #grep -E "^[1-9];[1-9]+;-;-;" c-wire_v00.csv | cut -d":" -f1 > $name_file1
 
 name_file2="hva_comp.csv"
@@ -180,8 +181,8 @@ if [ $? -ne 0 ];
   		exit 1
 fi
 head -n 1 ../$fichier | cut -d';' -f3,7,8 > $name_file2 
-grep -E "^[1-9];[1-9]+;[1-9]+;-;-;-;[1-9]+;-" ../$fichier| cut -d';' -f3,7,8 | sed 's/;/:/g' >> $name_file2  
-grep -E "^[1-9];-;[1-9]+;-;[1-9]+;-;-;[1-9]+" ../$fichier| cut -d';' -f3,7,8 | sed 's/;/:/g' >> $name_file2
+grep -E "^[1-9];[0-9]+;[0-9]+;-;-;-;[0-9]+;-" ../$fichier| cut -d';' -f3,7,8 | sed 's/;/:/g' >> $name_file2  
+grep -E "^[1-9];-;[0-9]+;-;[0-9]+;-;-;[0-9]+" ../$fichier| cut -d';' -f3,7,8 | sed 's/;/:/g' >> $name_file2
 
 
 name_file3="lv_comp.csv"
@@ -193,8 +194,8 @@ if [ $? -ne 0 ];
   		exit 1
 fi 
 head -n 1 ../$fichier | cut -d';' -f4,7,8 > $name_file3
-grep -E "[1-9];-;[1-9]+;[1-9]+;-;-;[1-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file3
-grep -E "[1-9];-;-;[1-9]+;[1-9]+;-;-;[1-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file3
+grep -E "[1-9];-;[0-9]+;[0-9]+;-;-;[0-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file3
+grep -E "[1-9];-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file3
 
 
 name_file4="lv_indiv.csv"
@@ -206,8 +207,8 @@ if [ $? -ne 0 ];
   		exit 1
 fi
 head -n 1 ../$fichier | cut -d';' -f4,7,8 > $name_file4
-grep -E "[1-9];-;-;[1-9]+;-;[1-9]+;-;[1-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file4
-grep -E "[1-9];-;[1-9]+;[1-9]+;-;-;[1-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file4
+grep -E "[1-9];-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file4
+grep -E "[1-9];-;[0-9]+;[0-9]+;-;-;[0-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file4
 
 name_file5="lv_all.csv"
 touch "$name_file5"
@@ -218,9 +219,9 @@ if [ $? -ne 0 ];
   		exit 1
 fi
 head -n 1 ../$fichier | cut -d';' -f4,7,8 >> $name_file5 
-grep -E "[1-9];-;[1-9]+;[1-9]+;-;-;[1-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file5
-grep -E "[1-9];-;-;[1-9]+;[1-9]+;-;-;[1-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
-grep -E "[1-9];-;-;[1-9]+;-;[1-9]+;-;[1-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
+grep -E "[1-9];-;[0-9]+;[0-9]+;-;-;[0-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file5
+grep -E "[1-9];-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
+grep -E "[1-9];-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
 
 cd ..
 
