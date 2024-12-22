@@ -143,5 +143,4 @@ void freeAVL(Arbre* a){
 		freeAVL(a->fg);
 		freeAVL(a->fd);
 		free(a);
-	}
 }
