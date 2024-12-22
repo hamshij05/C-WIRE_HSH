@@ -18,8 +18,35 @@ Arbre *parser_file(const char *str){
     }
     return nombre; //retourner la valeur convertie
 }
-       
-int main(){
+
+int main(int argc, char* argv[]){
+    if(argc < 3){
+        fprintf(stderr, "Traitement : %s <input_file> <fichier_resultat>\n", argv[0];
+        return 1;
+    }
+    const char* input_file = argv[1];
+    const char* fichier_resultat = argv[2];
+    const char* identifiant = argv[3]; //Récuperation le type de station
+
+    FILE* input = fopen(input_file, "r");
+    if(!input){
+        printf("Attention : Erreur lors de l'ouverture du fichier input");
+        return 1;
+    }
+    FILE* resultat = fopen(fichier_resultat, "w");
+    if(!=resultat){
+        printf("Erreur lors de l'ouverture du fichier de sortie.\n");
+        fclose(input);
+        return 1;
+    }
+    Arbre* a = NULL;
+    char line[256];
+
+    //Lecture des données et insertion dans l'arbre AVL
+    while (fgets(line, sizeof(line), input)){
+        
+    
+
   FILE*fichier=fopen("c-wire.csv","r");
   
   const char* fichier_csv = "c-wire_000.csv";
@@ -30,45 +57,3 @@ int main(){
     return 0;
 }
 
-int main(int argc, char* argv[]){
-    if(argc < 3){
-        fprintf(stderr, "Traitement : %s <input_file> <> 
-
-    int RouteID;
-    float distance;
-    char header[256];
-    int h = 0;
-
-    FILE *file = fopen(argv[1], "r");
-    if (file == NULL)
-    {
-        printf("Error while trying to open csv file.\n");
-        exit(1);
-    }
-
-    // Creates the AVL root with first line of csv
-    fgets(header, sizeof(header), file); // Skips header line
-
-    if (fscanf(file, "%d;%*d;%*[^;];%*[^;];%f;%*[^\n]", &RouteID, &distance) != 2)
-    {
-        printf("Error while gettings variables of csv.\n");
-        exit(1);
-    }
-    pAVL root = CreateAVL(RouteID, distance);
-
-
-
-
-
-
-
-
-
-
-
-
-
-#!/bin/bash
-
-    while getopts"nrt/k"opt
-    
