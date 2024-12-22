@@ -30,7 +30,7 @@ int hauteur(Arbre* a); //Calcul de l'hauteur de l'arbre AVL
 long facteur_equilibre(Arbre* r); //Calcul du facteur d'équilibre
 void infixe(Arbre* a, FILE* fichier_resultat); //Parcours en ordre croissant (infixe = parcours en ordre) et écriture dans le fichier de sortie
 void freeAVL(Arbre* a); //Libère la mémoire de l'arbre AVL
-void traiterFichier(const char *nomFichier, const char *nomFichierTmp)// traite les fichiers en AVL
+void traiterFichier(const char *nomFichier, const char *nomFichierTmp); // traite les fichiers en AVL
 
 
 #endif //BIBLIO_H
