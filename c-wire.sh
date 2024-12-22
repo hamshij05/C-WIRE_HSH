@@ -127,8 +127,8 @@ fi
 
 #echo "Station: $station, Conso: $conso"
 
-###################################################################################################
-EXECUTABLE="exec"
+################################################################################################### FONCTIONNEMENT INCERTAIN
+EXECUTABLE="EXEC"
 
 # Vérification de la présence du Makefile
 if [ ! -f "makefile" ];
@@ -269,6 +269,7 @@ grep -E "$plant;-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | 
 grep -E "$plant;-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
 
 cd ..
+./EXEC $station $conso
 
 fin_chrono $temps_1
 	
