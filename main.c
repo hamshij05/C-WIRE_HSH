@@ -1,3 +1,5 @@
+#include 'biblio.h'
+
 int main(int argc, char* argv[]) {
     const char *input_file = argv[1];
     const char *fichier_resultat = argv[2];
