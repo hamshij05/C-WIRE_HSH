@@ -1,15 +1,4 @@
-#include <biblio.h>
-
-//Structure d'Arbre AVL
-typedef struct arbre{
-  long identifiant; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
-  long capacite; //capacité de la station
-  long consommation; //consommation totale
-  struct arbre *fg;
-  struct arbre *fd;
-  int equilibre; //facteur d'équilibre pour l'arbre AVL
-  int hauteur;
-}Arbre;
+#include "biblio.h"
 
 long max(long x, long y) {
     return (x > y) ? x : y;
@@ -22,7 +11,7 @@ int hauteur (Arbre* a){
 }
 //Fonction pour calculer le facteur équilibre
 int facteur_equilibre(Arbre* r){
-  return r ? hauteur(r->fd) - hauteur(r->fg) : 0;
+  return (hauteur(r->fd) - hauteur(r->fg)); 
 }
 //Rotation gauche pour rééquilibrer l'arbre
 Arbre *rotationGauche(Arbre *pivot){
@@ -100,26 +89,40 @@ Arbre *insertionAVL(Arbre *a, long identifiant, const char* capacite, const char
   }
   //Mise à jour de la hauteur de l'arbre
   a->hauteur = hauteur(a);
-  //Mise à jour de l'équilibre de l'arbre
-  int equilibre=facteur_equilibre(a);
-  //Cas d'équilibre
-  if(equilibre > 1 && identifiant < a->fg->identifiant){
+// Mise à jour de l'équilibre de l'arbre
+int equilibre = facteur_equilibre(a);
+
+ // Cas d'équilibre trop à gauche (rotation droite nécessaire)
+ if (equilibre > 1 && identifiant < a->fg->identifiant) {
+    // Rotation droite simple
     return rotationDroite(a);
-  }
-  if(equilibre < -1 && identifiant > a->fd->identifiant){
+ }
+
+ // Cas d'équilibre trop à droite (rotation gauche nécessaire)
+ if (equilibre < -1 && identifiant > a->fd->identifiant) {
+    // Rotation gauche simple
     return rotationGauche(a);
-  }
-  if(equilibre > 1 && identifiant > a->fg->identifiant){
-    a->fg=rotationGauche(a->fg);
+ }
+
+ // Cas d'équilibre à gauche avec un sous-arbre droit trop lourd (rotation gauche-droite nécessaire)
+ if (equilibre > 1 && identifiant > a->fg->identifiant) {
+    // Rotation gauche sur le sous-arbre gauche puis droite sur le nœud actuel
+    a->fg = rotationGauche(a->fg);
     return rotationDroite(a);
-  }
-  if(equilibre < -1 && identifiant < a->fd->identifiant){
-    a->fd=rotationDroite(a->fd);
+ }
+
+ // Cas d'équilibre à droite avec un sous-arbre gauche trop lourd (rotation droite-gauche nécessaire)
+ if (equilibre < -1 && identifiant < a->fd->identifiant) {
+    // Rotation droite sur le sous-arbre droit puis gauche sur le nœud actuel
+    a->fd = rotationDroite(a->fd);
     return rotationGauche(a);
-  }
-  printf("Erreur : échec de l'insertion pour l'identifiant : %ld, capacité : %ld, Consommation : %ld\n", identifiant,atol(capacite), atol(consommation));
-  return a;
+ }
+
+ // Si aucune des rotations n'est nécessaire, retourner l'arbre inchangé
+ printf("Erreur : échec de l'insertion pour l'identifiant : %ld, capacité : %ld, Consommation : %ld\n", identifiant, atol(capacite), atol(consommation));
+ return a;
 }
+
 //Parcours en ordre croissant (infixe = parcours en ordre) et écriture dans le fichier de sortie
 void infixe(Arbre* a, FILE* fichier_resultat){ 
   if (a==NULL){
@@ -130,6 +133,7 @@ void infixe(Arbre* a, FILE* fichier_resultat){
   infixe(a->fd,fichier_resultat);
 }
 
+
 //Libère la mémoire de l'arbre AVL
 void freeAVL(Arbre* a){
   if (!a) return; //Si a est NULL, la fonction retourne
@@ -138,7 +142,7 @@ void freeAVL(Arbre* a){
     free(a);
 }
 
-void traiterFichier(const char *nomFichier, const char *nomFichierTmp) {
+void traiterFichier(const char *nomFichier, const char* nomFichierTmp) {
     FILE *fichier = fopen(nomFichier, "r");
     if (fichier == NULL) {
         printf("Erreur d'ouverture du fichier %s\n", nomFichier);
@@ -198,4 +202,3 @@ void traiterFichier(const char *nomFichier, const char *nomFichierTmp) {
 
     freeAVL(racine);  // Libérer l'arbre AVL
 }
-
