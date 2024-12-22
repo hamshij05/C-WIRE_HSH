@@ -46,9 +46,9 @@ if(!input){
     while (fgets(line, sizeof(ligne), input)){
         ligne[strcspn(ligne, "\n")] = 0;
     if ((strncmp(ligne, "LV Station:Capacity:Load", 24) == 0 && strcmp(identifiant, "LV") == 0) || (strncmp(ligne, "HV-A Station:Capacity:Load", 25) == 0 && strcmp(identifiant, "HV-A") == 0) || (strncmp(ligne, "HV-B Station:Capacity:Load", 25) == 0 && strcmp(identifiant, "HV-B") == 0)) {
-       printf(");
-           continue;
-           }
+        printf("Attention : header line ignorée);
+        continue;
+    }
     char* segment = strtok(ligne, ":");
         if(!segment){
             fprintf(stderr, "Attention : ligne ignorée : %s\n", ligne);
