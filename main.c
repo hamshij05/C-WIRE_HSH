@@ -1,4 +1,4 @@
-#include <biblio.h>
+#include "biblio.h"
 
 int main(int argc, char* argv[]){
     if(argc < 3){
@@ -178,25 +178,21 @@ int main(int argc, char* argv[]){
         }
     }
 
-    fclose(fichier);  // Fermer le fichier après lecture
+    fclose(fichier3);  // Fermer le fichier après lecture
 
-  const char *nomFichier21 = "tmp.csv";  
-  FILE *fichier21 = fopen(nomFichier21, "w");
+  const char *nomFichier31 = "tmp.csv";  
+  FILE *fichier31 = fopen(nomFichier31, "w");
   if (fichier == NULL) {
       printf("Erreur d'ouverture du fichier\n");
       return 0;
   }
   fprintf(fichier1, "ID station: Capacité: Consommation\n");
-  infixe(racine2,fichier21);
-  fclose(fichier1);
-  remove(nomFichier2);
-  rename(nomFichier21, nomFichier2);
+  infixe(racine3,fichier31);
+  fclose(fichier3);
+  remove(nomFichier3);
+  rename(nomFichier31, nomFichier3);
 
-  freeAVL(racine2); 
+  freeAVL(racine3); 
 
-
-
-    // Afficher l'arbre (parcours infixe)
-
-    return 0;
+return 0;
 }
