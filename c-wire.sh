@@ -128,7 +128,7 @@ fi
 #echo "Station: $station, Conso: $conso"
 
 ###################################################################################################
-EXECUTABLE="exec"
+EXECUTABLE="main"
 
 # Vérification de la présence du Makefile
 if [ ! -f "Makefile" ];
@@ -143,7 +143,7 @@ if [ ! -f "$EXECUTABLE" ];
 	echo "L'exécutable $EXECUTABLE est introuvable. Lancement de la compilation"
     
 	# lancer la compilation avec le Makefile
-	make
+	gcc -o main main.c
     
 	# Vérification si make a réussi
 	if [ $? -ne 0 ]; 
@@ -269,7 +269,7 @@ grep -E "$plant;-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | 
 grep -E "$plant;-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
 
 cd ..
-./EXECUTABLE $station $conso
+./$EXECUTABLE $station $conso
 
 fin_chrono $temps_1
 	
