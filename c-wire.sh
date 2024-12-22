@@ -127,8 +127,8 @@ fi
 
 #echo "Station: $station, Conso: $conso"
 
-################################################################################################### FONCTIONNEMENT INCERTAIN
-EXECUTABLE="EXEC"
+###################################################################################################
+EXECUTABLE="exec"
 
 # Vérification de la présence du Makefile
 if [ ! -f "makefile" ];
@@ -211,7 +211,7 @@ if [ $? -ne 0 ];
 		fin_chrono $temps_1
   		exit 1
 fi
-head -n 1 ../$fichier | cut -d';' -f2,7,8 > $name_file1 
+head -n 1 ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' > $name_file1 
 grep -E "$plant;[0-9]+;-;-;-;-;[0-9]+;-" ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' >> $name_file1 
 grep -E "$plant;[0-9]+;-;-;[1-9]+;-;-;[1-9]+" ../$fichier | cut -d';' -f2,7,8 | sed 's/;/:/g' >> $name_file1 
 
@@ -225,7 +225,7 @@ if [ $? -ne 0 ];
 		fin_chrono $temps_1
   		exit 1
 fi
-head -n 1 ../$fichier | cut -d';' -f3,7,8 > $name_file2 
+head -n 1 ../$fichier | cut -d';' -f3,7,8 | sed 's/;/:/g' > $name_file2   
 grep -E "$plant;[0-9]+;[0-9]+;-;-;-;[0-9]+;-" ../$fichier| cut -d';' -f3,7,8 | sed 's/;/:/g' >> $name_file2  
 grep -E "$plant;-;[0-9]+;-;[0-9]+;-;-;[0-9]+" ../$fichier| cut -d';' -f3,7,8 | sed 's/;/:/g' >> $name_file2
 
@@ -238,7 +238,7 @@ if [ $? -ne 0 ];
 		fin_chrono $temps_1
   		exit 1
 fi 
-head -n 1 ../$fichier | cut -d';' -f4,7,8 > $name_file3
+head -n 1 ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' > $name_file3
 grep -E "$plant;-;[0-9]+;[0-9]+;-;-;[0-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file3
 grep -E "$plant;-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file3
 
@@ -251,7 +251,7 @@ if [ $? -ne 0 ];
 		fin_chrono $temps_1
   		exit 1
 fi
-head -n 1 ../$fichier | cut -d';' -f4,7,8 > $name_file4
+head -n 1 ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' > $name_file4
 grep -E "$plant;-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file4
 grep -E "$plant;-;[0-9]+;[0-9]+;-;-;[0-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file4
 
@@ -263,7 +263,7 @@ if [ $? -ne 0 ];
 		fin_chrono $temps_1
   		exit 1
 fi
-head -n 1 ../$fichier | cut -d';' -f4,7,8 >> $name_file5 
+head -n 1 ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' > $name_file5 
 grep -E "$plant;-;[0-9]+;[0-9]+;-;-;[0-9]+;-" ../$fichier | cut -d";" -f4,7,8 | sed 's/;/:/g' >> $name_file5
 grep -E "$plant;-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
 grep -E "$plant;-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
