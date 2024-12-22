@@ -40,20 +40,24 @@ int main(int argc, char* argv[]){
         return 1;
     }
     Arbre* a = NULL;
-    char line[256];
+    char ligne[256];
 
     //Lecture des données et insertion dans l'arbre AVL
-    while (fgets(line, sizeof(line), input)){
-        
-    
+    while (fgets(line, sizeof(ligne), input)){
+        line[strcspn(ligne, "\n")] = 0;
+        if((strncmp(ligne, "LV Station : 
 
-  FILE*fichier=fopen("c-wire.csv","r");
-  
-  const char* fichier_csv = "c-wire_000.csv";
 
-    printf("Lecture et traitement du fichier CSV : %s\n", fichier_csv);
-    traiter_fichier_csv(fichier_csv);
+    char*         
 
-    return 0;
+ //Ecriture des résultats triés par les identifiants
+            fprintf("resultat, "Identifiant : Capacite : Consommation \n");
+            infixe(a, resultat);
+  //Libérer la mémoire et fermeture des ficheirs
+            freeAVL(
+            fclose(input);
+            fclose(resultat);
+        return 0;
+
 }
 
