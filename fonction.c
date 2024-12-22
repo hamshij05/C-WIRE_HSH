@@ -30,7 +30,7 @@ Arbre *creationArbre(long identifiant, const char* capacite, const char* consomm
 }
 
 //Insertion de l'arbre AVL
-Arbre *insertionAVL(Arbre *a, long identifiant, long capacite, long consommation){
+Arbre *insertionAVL(Arbre *a, long identifiant, const char* capacite, const char* consommation){
 	if (a==NULL){
 		return creationArbre(identifiant, capacite, consommation);
 	}
@@ -41,8 +41,8 @@ Arbre *insertionAVL(Arbre *a, long identifiant, long capacite, long consommation
 		a->fd = insertionAVL(a->fd,identifiant,capacite,consommation);
 	}
 	else{ //Mise à jour de la consommation et la capacité
-		a->consommation += consommation;
-		a->capacite = max(a->capacite,capacite);
+		a->consommation += atol(consommation);
+		a->capacite = max(a->capacite,atol(capacite));
 		return a;
 	}
 	//Mise à jour de la hauteur de l'arbre
