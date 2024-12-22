@@ -12,19 +12,21 @@ typedef struct arbre{
 }Arbre;
 
 //Création de nouveau noeud pour l'arbre AVL
-Arbre *creationArbre(long identifiant, long capacite, long consommation){
+Arbre *creationArbre(long identifiant, const char* capacite, const char* consommation){
 	Arbre*nouveau=malloc(sizeof(Arbre));
 	if(nouveau==NULL){
 		printf("Erreur d'allocation de mémoire\n");
 		exit(1);
 	}
 	nouveau->identifiant=identifiant;
-	nouveau->capacite=capacite;
-	nouveau->consommation=consommation;
+	//convertit les chaine de caractère en nombre, si il s'agit de nombre, et en 0 si il s'agit de "-"
+	nouveau->capacite=atol(capacite);	
+	nouveau->consommation=atol(consommation);
 	nouveau->fg=NULL;
 	nouveau->fd=NULL;
 	nouveau->equilibre=0;
-	nouveau->hauteur=1;
+	nouveau->hauteur=1	
+;
 	return nouveau;
 }
 
