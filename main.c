@@ -1,23 +1,4 @@
 #include <biblio.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-//Fonction de parsing et construction de l'arbre AVL
-long parser_file(const char *str){
-    char *restant;
-    //Vérifier si la chaîne est NULL ou si elle contient "-"
-    if(strcmp(str, "-") == 0){
-        return 0; 
-    }
-    //Convertir la chaîne en entier en base 10
-    long nombre = strtol(str, &restant, 10);
-    //Si la conversion ne consomme pas toute la chaine
-    if(*restant != '\0'){
-        printf("Attention : %s contient des caractères non numériques \n", restant);
-    }
-    return nombre; //retourner la valeur convertie
-}
 
 int main(int argc, char* argv[]){
 if(argc < 3){
