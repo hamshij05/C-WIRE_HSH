@@ -25,8 +25,7 @@ Arbre *creationArbre(long identifiant, const char* capacite, const char* consomm
 	nouveau->fg=NULL;
 	nouveau->fd=NULL;
 	nouveau->equilibre=0;
-	nouveau->hauteur=1	
-;
+	nouveau->hauteur=1;
 	return nouveau;
 }
 
