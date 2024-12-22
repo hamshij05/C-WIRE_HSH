@@ -23,7 +23,8 @@ Le système est composé de :
   - **`biblio.h`** : contient tous les bibliothèques utilisées, les définitions de les structures et les déclarations des fonctions.  
   - **`Makefile`** : permet d'automatiser la compilation  
   - **`fonctions.c`** : implémentation des fonctions déclarées dans biblio.h
-  - **`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL  
+  - **`main.c`** lit le fichier CSV, extrait les données et les insère dans un arbre AVL
+  - **`c-wire.sh`** fait le premier tri pour rassembler toute les informations par station, consommateur et centrale et organise et verifie puis appelle la partie C du processus via le makefile.
   - **`Rapport du projet`** contient un compte rendu sur l'organisation de l'équipe concernant le projet, les difficultés rencontrées, les solutions apportées et une brève description du projet.  
 
 ## Installation
