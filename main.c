@@ -53,6 +53,8 @@ int main(int argc, char* argv[]){
 
             // Insérer le nouveau noeud dans l'arbre AVL
             racine = insertionAVL(racine, identifiant, capacite, consommation);
+            free(capacite);
+            free(consommation);           
         }
     }
 
@@ -111,6 +113,8 @@ int main(int argc, char* argv[]){
 
             // Insérer le nouveau noeud dans l'arbre AVL
             racine2 = insertionAVL(racine2, identifiant, capacite, consommation);
+            free(capacite);
+            free(consommation);            
         }
     }
 
@@ -143,7 +147,7 @@ int main(int argc, char* argv[]){
     fgets(ligne3, sizeof(ligne3), fichier3);
 
     // Lire chaque ligne du fichier CSV
-    while (fgets(ligne, sizeof(ligne), fichier)) {
+    while (fgets(ligne3, sizeof(ligne3), fichier3)) {
         int identifiant;
         const char* capacite = malloc(sizeof(const char*));  
         const char* consommation = malloc(sizeof(const char*)); 
@@ -168,7 +172,9 @@ int main(int argc, char* argv[]){
             }
 
             // Insérer le nouveau noeud dans l'arbre AVL
-            racine2 = insertionAVL(racine2, identifiant, capacite, consommation);
+            racine3 = insertionAVL(racine2, identifiant, capacite, consommation);
+            free(capacite);
+            free(consommation);
         }
     }
 
