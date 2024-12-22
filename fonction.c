@@ -135,3 +135,65 @@ void freeAVL(Arbre* a){
     freeAVL(a->fd);
     free(a);
 }
+
+void traiterFichier(const char *nomFichier, const char *nomFichierTmp) {
+    FILE *fichier = fopen(nomFichier, "r");
+    if (fichier == NULL) {
+        printf("Erreur d'ouverture du fichier %s\n", nomFichier);
+        return;
+    }
+
+    char ligne[1024];
+    Arbre *racine = NULL;
+
+    // Ignore l'entête
+    fgets(ligne, sizeof(ligne), fichier);
+
+    // Lire chaque ligne du fichier CSV
+    while (fgets(ligne, sizeof(ligne), fichier)) {
+        long identifiant;
+        char *capacite = malloc(100 * sizeof(char));  
+        char *consommation = malloc(100 * sizeof(char)); 
+
+        // Séparer les colonnes de la ligne en utilisant strtok
+        char *sep = strtok(ligne, ":");
+        if (sep != NULL) {
+            identifiant = atol(sep);
+
+            sep = strtok(NULL, ":");
+            if (sep != NULL) {
+                strncpy(capacite, sep, 100);
+            }
+
+            sep = strtok(NULL, ":");
+            if (sep != NULL) {
+                strncpy(consommation, sep, 100);
+            }
+
+            // Insérer le nouveau noeud dans l'arbre AVL
+            racine = insertionAVL(racine, identifiant, capacite, consommation);
+        }
+
+        free(capacite);
+        free(consommation);
+    }
+
+    fclose(fichier);  // Fermer le fichier après lecture
+
+    // Ecrire les résultats dans un fichier temporaire
+    FILE *fichierTmp = fopen(nomFichierTmp, "w");
+    if (fichierTmp == NULL) {
+        printf("Erreur d'ouverture du fichier temporaire\n");
+        return;
+    }
+    fprintf(fichierTmp, "ID station: Capacité: Consommation\n");
+    infixe(racine, fichierTmp);
+    fclose(fichierTmp);
+
+    // Supprimer l'ancien fichier et renommer le fichier temporaire
+    remove(nomFichier);
+    rename(nomFichierTmp, nomFichier);
+
+    freeAVL(racine);  // Libérer l'arbre AVL
+}
+
