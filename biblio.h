@@ -19,7 +19,7 @@ typedef struct arbre{
 }Arbre;
 
 
-Arbre *creationArbre(long identifiant, long capacite, long consommation); //Création de noeud pour l'arbre AVL
+Arbre *creationArbre(long identifiant, const char* capacite, const char* consommation); //Création de noeud pour l'arbre AVL
 Arbre *insertionAVL(Arbre *a, long identifiant, long capacite, long consommation); //Insertion de l'arbre AVL
 long max(long x, long y); //Fonction pour obtenir la valeur maximale
 Arbre *rotationGauche(Arbre *pivot); //Rotation gauche pour réequilibrer l'arbre
