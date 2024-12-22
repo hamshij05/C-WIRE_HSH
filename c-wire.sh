@@ -269,7 +269,7 @@ grep -E "$plant;-;-;[0-9]+;[0-9]+;-;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | 
 grep -E "$plant;-;-;[0-9]+;-;[0-9]+;-;[0-9]+" ../$fichier | cut -d';' -f4,7,8 | sed 's/;/:/g' >> $name_file5
 
 cd ..
-./EXEC $station $conso
+./EXECUTABLE $station $conso
 
 fin_chrono $temps_1
 	
