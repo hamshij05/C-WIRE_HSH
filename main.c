@@ -1,4 +1,4 @@
-#include <biblio.h<
+#include <biblio.h>
 
 int main(int argc, char* argv[]) {
     const char *input_file = argv[1];
