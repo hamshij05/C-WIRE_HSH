@@ -1,4 +1,4 @@
-#include <biblio.h>
+#include "biblio.h"
 
 int main(int argc, char* argv[]){
     if(argc < 3){
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]){
         //ligne[strcspn(ligne, "\n")] = 0;
 
         // Séparer les colonnes de la ligne en utilisant strtok (séparateur ":")
-        char *sep = strtok(ligne, ":");
+        char *sep = strtok(ligne2, ":");
 
         if (sep != NULL) {
             identifiant = atol(sep);
@@ -118,7 +118,7 @@ int main(int argc, char* argv[]){
         }
     }
 
-    fclose(fichier);  // Fermer le fichier après lecture
+    fclose(fichier2);  // Fermer le fichier après lecture
 
   const char *nomFichier21 = "tmp.csv";  
   FILE *fichier21 = fopen(nomFichier21, "w");
@@ -126,9 +126,9 @@ int main(int argc, char* argv[]){
       printf("Erreur d'ouverture du fichier\n");
       return 0;
   }
-  fprintf(fichier1, "ID station: Capacité: Consommation\n");
+  fprintf(fichier21, "ID station: Capacité: Consommation\n");
   infixe(racine2,fichier21);
-  fclose(fichier1);
+  fclose(fichier21);
   remove(nomFichier2);
   rename(nomFichier21, nomFichier2);
 
@@ -172,7 +172,7 @@ int main(int argc, char* argv[]){
             }
 
             // Insérer le nouveau noeud dans l'arbre AVL
-            racine3 = insertionAVL(racine2, identifiant, capacite, consommation);
+            racine3 = insertionAVL(racine3, identifiant, capacite, consommation);
             free(capacite);
             free(consommation);
         }
@@ -186,13 +186,133 @@ int main(int argc, char* argv[]){
       printf("Erreur d'ouverture du fichier\n");
       return 0;
   }
-  fprintf(fichier1, "ID station: Capacité: Consommation\n");
+  fprintf(fichier31, "ID station: Capacité: Consommation\n");
   infixe(racine3,fichier31);
-  fclose(fichier3);
+  fclose(fichier31);
   remove(nomFichier3);
   rename(nomFichier31, nomFichier3);
 
   freeAVL(racine3); 
 
+  FILE *fichier4= fopen(nomFichier4, "r");
+    if (fichier4 == NULL) {
+        printf("Erreur d'ouverture du fichier\n");
+        return 1;
+    }
+
+    char ligne4[1024];  // Tableau pour lire chaque ligne
+    Arbre *racine4 = NULL;  // Pointeur vers la racine de l'AVL
+
+    // Ignore l'entête
+    fgets(ligne4, sizeof(ligne4), fichier4);
+
+    // Lire chaque ligne du fichier CSV
+    while (fgets(ligne4, sizeof(ligne4), fichier4)) {
+        int identifiant;
+        const char* capacite = malloc(sizeof(const char*));  
+        const char* consommation = malloc(sizeof(const char*)); 
+
+        // Enlever le saut de ligne à la fin de la ligne lue
+        //ligne[strcspn(ligne, "\n")] = 0;
+
+        // Séparer les colonnes de la ligne en utilisant strtok (séparateur ":")
+        char *sep = strtok(ligne4, ":");
+
+        if (sep != NULL) {
+            identifiant = atol(sep);
+
+            sep = strtok(NULL, ":");
+            if (sep != NULL) {
+                capacite = sep;
+            }
+
+            sep = strtok(NULL, ":");
+            if (sep != NULL) {
+                consommation = sep;
+            }
+
+            // Insérer le nouveau noeud dans l'arbre AVL
+            racine4 = insertionAVL(racine4, identifiant, capacite, consommation);
+            free(capacite);
+            free(consommation);
+        }
+    }
+
+    fclose(fichier4);  // Fermer le fichier après lecture
+
+  const char *nomFichier41 = "tmp.csv";  
+  FILE *fichier41 = fopen(nomFichier41, "w");
+  if (fichier41 == NULL) {
+      printf("Erreur d'ouverture du fichier\n");
+      return 0;
+  }
+  fprintf(fichier41, "ID station: Capacité: Consommation\n");
+  infixe(racine4,fichier41);
+  fclose(fichier41);
+  remove(nomFichier4);
+  rename(nomFichier41, nomFichier4);
+
+  freeAVL(racine4); 
+
+  FILE *fichier5= fopen(nomFichier5, "r");
+    if (fichier5 == NULL) {
+        printf("Erreur d'ouverture du fichier\n");
+        return 1;
+    }
+
+    char ligne5[1024];  // Tableau pour lire chaque ligne
+    Arbre *racine5 = NULL;  // Pointeur vers la racine de l'AVL
+
+    // Ignore l'entête
+    fgets(ligne5, sizeof(ligne5), fichier5);
+
+    // Lire chaque ligne du fichier CSV
+    while (fgets(ligne5, sizeof(ligne5), fichier5)) {
+        int identifiant;
+        const char* capacite = malloc(sizeof(const char*));  
+        const char* consommation = malloc(sizeof(const char*)); 
+
+        // Enlever le saut de ligne à la fin de la ligne lue
+        //ligne[strcspn(ligne, "\n")] = 0;
+
+        // Séparer les colonnes de la ligne en utilisant strtok (séparateur ":")
+        char *sep = strtok(ligne5, ":");
+
+        if (sep != NULL) {
+            identifiant = atol(sep);
+
+            sep = strtok(NULL, ":");
+            if (sep != NULL) {
+                capacite = sep;
+            }
+
+            sep = strtok(NULL, ":");
+            if (sep != NULL) {
+                consommation = sep;
+            }
+
+            // Insérer le nouveau noeud dans l'arbre AVL
+            racine5 = insertionAVL(racine5, identifiant, capacite, consommation);
+            free(capacite);
+            free(consommation);
+        }
+    }
+
+    fclose(fichier5);  // Fermer le fichier après lecture
+
+  const char *nomFichier51 = "tmp.csv";  
+  FILE *fichier51 = fopen(nomFichier51, "w");
+  if (fichier51 == NULL) {
+      printf("Erreur d'ouverture du fichier\n");
+      return 0;
+  }
+  fprintf(fichier51, "ID station: Capacité: Consommation\n");
+  infixe(racine5,fichier51);
+  fclose(fichier51);
+  remove(nomFichier5);
+  rename(nomFichier51, nomFichier5);
+
+  freeAVL(racine5); 
+  
 return 0;
 }
