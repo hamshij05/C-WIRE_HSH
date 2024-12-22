@@ -14,7 +14,7 @@ Arbre *parser_file(const char *str){
     long nombre = strtol(str, &restant, 10);
     //Si la conversion ne consomme pas toute la chaine
     if(*restant != '\0'){
-        printf("Attention : \"%s\" contient des caractères non numériques\n", str);
+        printf("Attention : %s contient des caractères non numériques \n", restant);
     }
     return nombre; //retourner la valeur convertie
 }
@@ -32,7 +32,7 @@ int main(){
 
 int main(int argc, char* argv[]){
     if(argc < 3){
-        fprintf(stderr, 
+        fprintf(stderr, "Traitement : %s <input_file> <> 
 
     int RouteID;
     float distance;
