@@ -1,3 +1,4 @@
+#include 'biblio.h'
 //Structure d'Arbre AVL
 typedef struct arbre{
   long identifiant; //identifiant de chaque station : Powerplant,HV-A, HV-B, LV stations
