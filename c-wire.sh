@@ -105,7 +105,7 @@ elif [ "$3" = "all" ];
 		then
 		aide
 		exit 1
-	elif [ "$station" = 2	]
+	elif [ "$station" = 2	];
 		then 
 		aide
 		exit 1	
@@ -131,7 +131,7 @@ fi
 EXECUTABLE="exec"
 
 # Vérification de la présence du Makefile
-if [ ! -f "makefile" ];
+if [ ! -f "Makefile" ];
 	then
 	echo "Erreur: Le fichier Makefile est introuvable."
 	exit 1
